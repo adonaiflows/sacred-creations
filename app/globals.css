@@ -24,7 +24,19 @@
     transform: translateY(0);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes shadow-breathe {
+  0%,
+  100% {
+    transform: translateX(-50%) scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: translateX(-50%) scale(0.82);
+    opacity: 0.7;
   }
 }
 
@@ -49,7 +61,8 @@
 }
 
 html {
-  background: var(--color-parchment);
+  background: var(--color-parchment) url("/textures/limewash-light.webp") repeat;
+  background-size: 640px;
   color: var(--color-ink);
   -webkit-font-smoothing: antialiased;
 }
@@ -81,12 +94,24 @@ html.lenis body {
 .sunwash {
   background-image:
     radial-gradient(90% 70% at 80% 10%, rgba(227, 201, 79, 0.28), transparent 60%),
-    radial-gradient(70% 60% at 0% 100%, rgba(198, 121, 38, 0.12), transparent 60%);
+    radial-gradient(70% 60% at 0% 100%, rgba(198, 121, 38, 0.12), transparent 60%),
+    url("/textures/limewash-light.webp");
+  background-size: auto, auto, 640px;
 }
 
 .paper {
-  background-color: var(--color-parchment-deep);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .28 0 0 0 0 .15 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background: var(--color-parchment-deep) url("/textures/limewash-stone.webp") repeat;
+  background-size: 720px;
+}
+
+/* Clay limewash wall with a warm spotlight, for the storefront display. */
+.wall {
+  background-color: #c6a07c;
+  background-image:
+    radial-gradient(60% 55% at 50% 30%, rgba(255, 236, 205, 0.55), transparent 70%),
+    radial-gradient(120% 90% at 50% 120%, rgba(60, 32, 14, 0.35), transparent 60%),
+    url("/textures/limewash-clay.webp");
+  background-size: auto, auto, 820px;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -97,4 +122,32 @@ html.lenis body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* An arched alcove recessed into the wall: darker plaster, shadow under the lip, light pooling at the base. */
+.niche {
+  background-color: #b48b66;
+  background-image:
+    radial-gradient(70% 30% at 50% 100%, rgba(255, 232, 196, 0.45), transparent 70%),
+    linear-gradient(to bottom, rgba(70, 38, 16, 0.35), transparent 35%),
+    url("/textures/limewash-clay.webp");
+  background-size: auto, auto, 600px;
+  box-shadow:
+    inset 0 28px 50px -10px rgba(60, 30, 10, 0.55),
+    inset 18px 0 40px -20px rgba(60, 30, 10, 0.35),
+    inset -18px 0 40px -20px rgba(60, 30, 10, 0.35),
+    0 1px 0 rgba(255, 236, 210, 0.5);
+}
+
+/* Plaster sill under the alcove. */
+.niche::after {
+  content: "";
+  position: absolute;
+  left: -5%;
+  right: -5%;
+  bottom: -12px;
+  height: 12px;
+  border-radius: 3px;
+  background: linear-gradient(to bottom, #e6cfae, #c9a47f);
+  box-shadow: 0 12px 24px -8px rgba(60, 30, 10, 0.45);
 }

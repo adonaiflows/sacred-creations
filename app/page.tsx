@@ -11,6 +11,7 @@ import { SpinViewer } from "@/components/ui/SpinViewer";
 import { Spirograph } from "@/components/ui/Spirograph";
 import { StickyBuy } from "@/components/ui/StickyBuy";
 import { Ticker } from "@/components/ui/Ticker";
+import { WalkIn } from "@/components/ui/WalkIn";
 import { affirmation, BUY_URL, contact, faqs, ingredients, labelStory, product, standard } from "@/lib/site";
 
 const productJsonLd = {
@@ -95,34 +96,36 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 03 · THE BOTTLE: a real turntable of the bottle, drag to turn */}
-        <section id="bottle" className="paper relative border-y border-ink/10" aria-labelledby="bottle-title">
-          <div className="mx-auto grid min-h-svh max-w-6xl items-center gap-10 px-4 py-20 sm:px-6 md:grid-cols-2 md:gap-16">
-            <SpinViewer className="mx-auto aspect-[600/992] w-full max-w-[440px] overflow-hidden rounded-t-[999px] rounded-b-[28px] shadow-[0_40px_80px_-40px_rgba(46,30,20,0.55)] ring-1 ring-ink/10" />
-            <div data-reveal>
+        {/* 03 · THE BOTTLE: the real bottle floating in a lit alcove on a limewash wall, drag to turn */}
+        <section id="bottle" className="wall relative overflow-hidden" aria-labelledby="bottle-title">
+          <WalkIn className="mx-auto grid min-h-svh max-w-6xl items-center gap-12 px-4 py-20 sm:px-6 md:grid-cols-[1.05fr_0.95fr] md:gap-16">
+            <div className="niche relative mx-auto aspect-[3/5] w-full max-w-[400px] rounded-t-[999px] rounded-b-md">
+              <SpinViewer className="absolute inset-x-[8%] top-[6%] bottom-[3%]" />
+            </div>
+            <div className="paper rounded-[28px] p-7 shadow-[0_30px_70px_-30px_rgba(46,30,20,0.6)] ring-1 ring-ink/10 md:p-10" data-reveal>
               <Eyebrow>Chapter one · The bottle</Eyebrow>
-              <h2 id="bottle-title" className="font-display text-4xl leading-tight md:text-[3.4rem]">
+              <h2 id="bottle-title" className="font-display text-4xl leading-tight md:text-[3.2rem]">
                 One ounce of <span className="accent text-copper">liquid gold.</span>
               </h2>
               <p className="mt-5 max-w-md text-muted md:text-lg">
                 Frosted glass, a bamboo dropper and a parchment label you&apos;ll want to keep on display. Turn it around to read the back.
               </p>
-              <dl className="mt-10 grid max-w-md grid-cols-2 gap-px overflow-hidden rounded-2xl border border-ink/10 bg-ink/10">
+              <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-ink/10 bg-ink/10">
                 {[
                   ["Size", "1 fl oz"],
                   ["Lasts", "6–8 weeks daily"],
                   ["Use", "2–3 drops, AM or PM"],
                   ["Ships", "US, via USPS"],
                 ].map(([k, v]) => (
-                  <div key={k} className="bg-parchment p-4">
+                  <div key={k} className="bg-parchment/90 p-4">
                     <dt className="text-xs tracking-[0.2em] text-muted uppercase">{k}</dt>
                     <dd className="mt-1 font-display text-xl">{v}</dd>
                   </div>
                 ))}
               </dl>
-              <BuyButton location="bottle" className="mt-10" />
+              <BuyButton location="bottle" className="mt-8" />
             </div>
-          </div>
+          </WalkIn>
         </section>
 
         {/* 04 · INGREDIENTS: one photo opens up to full height as you scroll */}

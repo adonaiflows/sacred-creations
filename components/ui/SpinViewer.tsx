@@ -86,24 +86,31 @@ export function SpinViewer({ className = "" }: { className?: string }) {
       onPointerUp={onPointerUp}
       onPointerCancel={onPointerUp}
       onKeyDown={onKeyDown}
-      className={`group relative cursor-grab touch-pan-y select-none active:cursor-grabbing ${className}`}
+      className={`group cursor-grab touch-pan-y select-none active:cursor-grabbing ${className}`}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element -- frames are pre-sized WebP, swapped every few ms */}
-      <img
-        src={src(ready ? frame : 0)}
-        alt="Liquid Gold in frosted glass with a bamboo dropper, photographed all the way around so both sides of the label show"
-        width={600}
-        height={992}
-        draggable={false}
-        loading="lazy"
-        decoding="async"
-        className="pointer-events-none h-full w-full object-cover"
+      {/* Bottle floats on its own; the soft contact shadow breathes with it. */}
+      <div className="absolute inset-x-0 top-0 bottom-[13%] motion-safe:animate-[float_6s_ease-in-out_infinite]">
+        {/* eslint-disable-next-line @next/next/no-img-element -- transparent frames, swapped every few ms */}
+        <img
+          src={src(ready ? frame : 0)}
+          alt="Liquid Gold in frosted glass with a bamboo dropper, photographed all the way around so both sides of the label show"
+          width={480}
+          height={1363}
+          draggable={false}
+          loading="lazy"
+          decoding="async"
+          className="pointer-events-none h-full w-full object-contain object-bottom drop-shadow-[0_24px_30px_rgba(60,30,10,0.18)]"
+        />
+      </div>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute bottom-[9%] left-1/2 h-[4%] w-[52%] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(closest-side,rgba(52,28,12,0.42),rgba(52,28,12,0.12)_60%,transparent)] blur-[3px] motion-safe:animate-[shadow-breathe_6s_ease-in-out_infinite]"
       />
       <div
         aria-hidden
-        className={`pointer-events-none absolute inset-x-0 bottom-5 flex justify-center transition-opacity duration-700 ${touched ? "opacity-0" : "opacity-100"}`}
+        className={`pointer-events-none absolute inset-x-0 bottom-0 flex justify-center transition-opacity duration-700 ${touched ? "opacity-0" : "opacity-100"}`}
       >
-        <span className="inline-flex items-center gap-3 rounded-full bg-parchment/85 px-4 py-2 text-[11px] font-medium tracking-[0.24em] text-ink uppercase backdrop-blur">
+        <span className="inline-flex items-center gap-3 rounded-full bg-parchment/80 px-4 py-2 text-[11px] font-medium tracking-[0.24em] text-ink uppercase backdrop-blur">
           <span className="text-copper">&larr;</span> Drag to turn <span className="text-copper">&rarr;</span>
         </span>
       </div>
