@@ -6,7 +6,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Eyebrow } from "@/components/ui/Section";
 import { Spirograph } from "@/components/ui/Spirograph";
 import { StickyBuy } from "@/components/ui/StickyBuy";
-import { BottleShowcase } from "@/components/three/BottleShowcase";
+import { TiltPhoto } from "@/components/ui/TiltPhoto";
 import { affirmation, BUY_URL, contact, faqs, ingredients, labelStory, product, standard } from "@/lib/site";
 
 const productJsonLd = {
@@ -99,9 +99,15 @@ export default function Home() {
         {/* 3D BOTTLE */}
         <section id="bottle" className="paper relative overflow-hidden border-y border-ink/10" aria-labelledby="bottle-title">
           <div className="mx-auto grid max-w-6xl items-center gap-8 px-4 py-20 sm:px-6 md:grid-cols-2 md:py-24">
-            <div className="relative h-[460px] md:h-[620px]">
-              <BottleShowcase />
-            </div>
+            {/* TODO: swap in the 3D bottle (components/three) once a scanned GLB of the real bottle exists. */}
+            <TiltPhoto
+              src="/images/bottle-woodchips.jpg"
+              alt="Close-up of Liquid Gold: frosted glass with golden oil, a bamboo dropper with a white bulb, and the parchment label listing its four organic ingredients"
+              sizes="(min-width: 768px) 520px, 92vw"
+              objectPosition="55% 6%"
+              depth={6}
+              className="mx-auto aspect-[4/5] w-full max-w-[520px] rounded-t-[999px] rounded-b-[28px] shadow-[0_40px_80px_-40px_rgba(46,30,20,0.55)] ring-1 ring-ink/10"
+            />
             <div data-reveal>
               <Eyebrow>The bottle</Eyebrow>
               <h2 id="bottle-title" className="font-display text-4xl leading-tight md:text-5xl">
@@ -109,7 +115,6 @@ export default function Home() {
               </h2>
               <p className="mt-4 max-w-md text-muted md:text-lg">
                 Frosted glass, a bamboo dropper and a parchment label you&apos;ll want to keep on display.
-                <span className="hidden md:inline"> Drag the bottle to turn it.</span>
               </p>
               <dl className="mt-8 grid max-w-md grid-cols-2 gap-px overflow-hidden rounded-2xl border border-ink/10 bg-ink/10">
                 {[
@@ -202,10 +207,10 @@ export default function Home() {
         <section className="sunwash" aria-labelledby="mid-cta-title">
           <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-20 sm:px-6 md:grid-cols-2 md:py-24">
             <ParallaxPhoto
-              src="/images/bottle-woodchips.jpg"
-              alt="Liquid Gold lying on cedar wood chips, its parchment label showing the flower of life logo and ingredient list"
+              src="/images/bottle-fence.jpg"
+              alt="Liquid Gold on a weathered fence post, with green fields and mountains softly blurred behind"
               sizes="(min-width: 768px) 520px, 92vw"
-              objectPosition="55% 50%"
+              objectPosition="35% 55%"
               className="aspect-[4/5] rounded-[28px] shadow-[0_30px_60px_-35px_rgba(46,30,20,0.5)] md:order-2"
             />
             <div data-reveal>

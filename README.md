@@ -10,6 +10,6 @@ npm run dev     # http://localhost:3000
 npm run build
 ```
 
-- 3D: procedural bottle in `components/three/` (no GLB yet). Desktop gets the live scene after idle;
-  phones, low-power devices and reduced-motion get `public/posters/hero-bottle.png`, a render of the same scene.
-- All copy comes from `docs/client-brief.md`. Open TODOs: `grep -rn TODO app components lib`.
+- The page shows the real product photos. `components/three/` holds a procedural 3D bottle that is not on the page
+  right now; it is kept to reuse once a scanned GLB of the real bottle exists (see TODO in `app/page.tsx`).
+- All copy comes from `docs/client-brief.md` and the label (`docs/assets`). Open TODOs: `grep -rn TODO app components lib`.
