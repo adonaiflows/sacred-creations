@@ -3,7 +3,7 @@
 Your answers are kept as you gave them. Everything marked **(site)** was read from the public store on 2026-10-19, with the page it came from. `TODO:` marks anything not on the site that the client has to answer. Nothing here is invented.
 
 ## ⚠️ Fix on the live store first
-- **The only product shows as sold out.** The Liquid Gold product page says "Variant sold out or unavailable" / "Sold out", while the catalog page says "In stock (1)". Any traffic we send right now can't buy. Check inventory tracking on the 1 oz variant in Shopify admin. (site: /products/liquid-gold, /collections/all)
+- ~~The only product shows as sold out.~~ Corrected 2026-10-19: Liquid Gold is **in stock**. The store's live product API (/products/liquid-gold.js) returns `available: true` for the 1 oz variant. The "Sold out" text came from a stale copy of the page served to automated fetchers, not what shoppers see.
 - **Product is tagged "Sample Product"** and its weight is **0.0 lb**, so calculated USPS shipping may be wrong. (site: /products/liquid-gold.json)
 - **Product description contains leftover citation markup** (stray citation spans, empty superscripts, a stray meta charset tag), likely pasted from an AI tool. Clean it up in admin. (site: /products/liquid-gold.json)
 - **Product images have no alt text.** (site: /products/liquid-gold.json)
@@ -43,7 +43,7 @@ Your answers are kept as you gave them. Everything marked **(site)** was read fr
 - Fonts: `TODO:` same, Shopify admin > Theme settings > Typography, or the client.
 - Vibe in 3 words: hydrating, clean luxury, intentional
   - (site) Supporting language the store already uses: "Intentional, Natural, Heart-crafted", "vibrational elixir", ritual, slowing down, prayer, altar.
-- 2-3 sites they love: `TODO:` client
+- 2-3 sites they love: [animamundiherbals.com](https://animamundiherbals.com/) (client reference, 2026-10-19: warm, earthy, editorial wellness feel with styled natural photography). `TODO:` what specifically she likes about it, and any others.
 - Anything they hate: `TODO:` client
 
 ## Proof

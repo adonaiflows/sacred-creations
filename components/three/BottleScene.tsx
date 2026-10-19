@@ -8,10 +8,11 @@ import { LiquidGoldBottle } from "./LiquidGoldBottle";
 type Props = {
   active: boolean;
   onReady: () => void;
+  mobile?: boolean;
 };
 
-export default function BottleScene({ active, onReady }: Props) {
-  const [dpr, setDpr] = useState(1.75);
+export default function BottleScene({ active, onReady, mobile = false }: Props) {
+  const [dpr, setDpr] = useState(mobile ? 1.5 : 1.75);
 
   return (
     <Canvas

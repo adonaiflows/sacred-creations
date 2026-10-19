@@ -47,6 +47,23 @@ function frostedGlass() {
   return geo;
 }
 
+// Rubber bulb measured from the fence photo: flared base where it meets the collar, slim straight
+// body, round top. Heights relative to the collar's top face.
+function bulbProfile() {
+  const pts: THREE.Vector2[] = [new THREE.Vector2(0, 0)];
+  for (let i = 0; i <= 10; i++) {
+    const y = (i / 10) * 0.6;
+    const t = THREE.MathUtils.smoothstep(y, 0, 0.5);
+    pts.push(new THREE.Vector2(THREE.MathUtils.lerp(0.4, 0.3, t), y));
+  }
+  pts.push(new THREE.Vector2(0.3, 0.83));
+  for (let i = 1; i <= 12; i++) {
+    const a = (i / 12) * (Math.PI / 2);
+    pts.push(new THREE.Vector2(Math.cos(a) * 0.3, 0.83 + Math.sin(a) * 0.3));
+  }
+  return pts;
+}
+
 function bambooTexture() {
   const c = document.createElement("canvas");
   c.width = 1024;
@@ -58,9 +75,9 @@ function bambooTexture() {
   const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
   for (let i = 0; i < 260; i++) {
     const x = rand() * c.width;
-    const w = 1 + rand() * 6;
+    const w = 0.6 + rand() * 3.5;
     const light = rand() > 0.5;
-    g.fillStyle = light ? `rgba(240,205,150,${0.15 + rand() * 0.3})` : `rgba(150,95,45,${0.08 + rand() * 0.22})`;
+    g.fillStyle = light ? `rgba(245,214,165,${0.15 + rand() * 0.3})` : `rgba(196,112,48,${0.1 + rand() * 0.3})`;
     g.fillRect(x, 0, w, c.height);
   }
   const tex = new THREE.CanvasTexture(c);
@@ -79,10 +96,13 @@ export function LiquidGoldBottle() {
     tex.anisotropy = 8;
   });
 
-  const { glass, bamboo } = useMemo(() => ({ glass: frostedGlass(), bamboo: bambooTexture() }), []);
+  const { glass, bamboo, bulb } = useMemo(
+    () => ({ glass: frostedGlass(), bamboo: bambooTexture(), bulb: new THREE.LatheGeometry(bulbProfile(), 64) }),
+    [],
+  );
 
-  // The label art is ~2.5:1 and wraps ~96% of the bottle; centre the front panel (u ≈ 0.29) on the camera.
-  const labelArc = Math.PI * 2 * 0.96;
+  // The label art is ~2.5:1 and wraps almost all the way round; centre the front panel (u ≈ 0.29) on the camera.
+  const labelArc = Math.PI * 2 * 0.99;
   const labelStart = -0.29 * labelArc;
 
   // ?poster freezes the bottle front-on, for rendering public/posters/liquid-gold-3d.png.
@@ -137,9 +157,8 @@ export function LiquidGoldBottle() {
         <meshStandardMaterial color="#c99a5e" roughness={0.6} />
       </mesh>
       {/* white bulb */}
-      <mesh position={[0, 5.62, 0]}>
-        <capsuleGeometry args={[0.36, 0.78, 16, 48]} />
-        <meshPhysicalMaterial color="#f6f3ec" roughness={0.42} sheen={0.4} sheenColor="#ffffff" envMapIntensity={0.7} />
+      <mesh geometry={bulb} position={[0, 5.0, 0]}>
+        <meshPhysicalMaterial color="#f4f1ea" roughness={0.55} sheen={0.5} sheenColor="#ffffff" envMapIntensity={0.7} />
       </mesh>
     </group>
   );
