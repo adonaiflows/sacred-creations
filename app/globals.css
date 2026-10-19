@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+/* Palette taken from the Liquid Gold label, logo and product photos (docs/assets). */
+@theme {
+  --color-parchment: #f7f0e0;
+  --color-parchment-deep: #ede1c6;
+  --color-ink: #2e1e14;
+  --color-ink-soft: #3d281b;
+  --color-muted: #6a5343;
+  --color-copper: #a4532e;
+  --color-copper-deep: #84401f;
+  --color-amber: #c67926;
+  --color-oil: #e3c94f;
+  --color-bamboo: #d4a86e;
+  --color-sage: #7d8a62;
+  --color-sandstone: #c8957c;
+  --font-display: var(--font-marcellus), ui-serif, Georgia, serif;
+  --font-sans: var(--font-jost), ui-sans-serif, system-ui, sans-serif;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes spin-slow {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+html {
+  background: var(--color-parchment);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-copper);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.on-dark :focus-visible {
+  outline-color: var(--color-oil);
+}
+
+::selection {
+  background: var(--color-oil);
+  color: var(--color-ink);
+}
+
+/* Warm sunlit wash behind the hero, like the photos' late-afternoon light. */
+.sunwash {
+  background-image:
+    radial-gradient(90% 70% at 80% 10%, rgba(227, 201, 79, 0.28), transparent 60%),
+    radial-gradient(70% 60% at 0% 100%, rgba(198, 121, 38, 0.12), transparent 60%);
+}
+
+.paper {
+  background-color: var(--color-parchment-deep);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .28 0 0 0 0 .15 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
