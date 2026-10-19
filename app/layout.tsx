@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Jost, Marcellus } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
 import { SmoothScroll } from "@/components/ui/SmoothScroll";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
@@ -46,7 +45,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="font-sans">
         <SmoothScroll />
         {children}
-        <Analytics />
       </body>
     </html>
   );
