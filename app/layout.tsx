@@ -14,6 +14,7 @@ const marcellus = Marcellus({
 
 const jost = Jost({
   subsets: ["latin"],
+  style: ["normal", "italic"],
   variable: "--font-jost",
   display: "swap",
 });
