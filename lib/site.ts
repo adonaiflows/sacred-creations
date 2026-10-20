@@ -59,7 +59,7 @@ export const standard = [
   {
     step: "02",
     title: "Hand-crafted",
-    body: "Each ingredient is prepared by hand, in small batches, with prayer and intention. Bottles are made to order.",
+    body: "Each ingredient is prepared by hand, in small batches, with prayer and intention.",
   },
   {
     step: "03",
@@ -79,7 +79,7 @@ export const faqs = [
   },
   {
     q: "When will it ship?",
-    a: "Each bottle is made to order. Orders ship within the US by USPS after 2–3 business days of processing, and usually arrive 3–5 business days later. Shipping is calculated at checkout.",
+    a: "Orders ship within the US by USPS after 2–3 business days of processing, and usually arrive 3–5 business days later. Shipping is calculated at checkout.",
   },
   {
     q: "What if it isn't right for me?",

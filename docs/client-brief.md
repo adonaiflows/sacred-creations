@@ -43,7 +43,7 @@ Your answers are kept as you gave them. Everything marked **(site)** was read fr
 - Fonts: `TODO:` same, Shopify admin > Theme settings > Typography, or the client.
 - Vibe in 3 words: hydrating, clean luxury, intentional
   - (site) Supporting language the store already uses: "Intentional, Natural, Heart-crafted", "vibrational elixir", ritual, slowing down, prayer, altar.
-- 2-3 sites they love: [animamundiherbals.com](https://animamundiherbals.com/) (client reference, 2026-10-19: warm, earthy, editorial wellness feel with styled natural photography). `TODO:` what specifically she likes about it, and any others.
+- 2-3 sites they love: [animamundiherbals.com](https://animamundiherbals.com/) (client reference, 2026-10-19: warm, earthy, editorial wellness feel with styled natural photography); [fitosauna.com/products/oils](https://fitosauna.com/products/oils/) (client reference, 2026-10-19: calm text-led hero, large feature blocks with big images, numbered ritual cards, tabbed product details). `TODO:` what specifically the client likes about each.
 - Anything they hate: `TODO:` client
 
 ## Proof
@@ -64,3 +64,10 @@ Your answers are kept as you gave them. Everything marked **(site)** was read fr
 - Deadline: `TODO:` client
 - Domain + hosting access: (site) domain sacredcreations.shop, currently on Shopify. `TODO:` decide whether the new site replaces the Shopify theme (headless with Shopify checkout) or sits beside it; needs domain registrar + Shopify access.
 - Who approves the design: `TODO:` client
+
+## Client feedback 2026-10-20 (relayed by Adonai)
+- "Made to order" is FALSE: never use it, even though the store copy says it.
+- Client says Liquid Gold is non-comedogenic; wants that mentioned (client-stated claim).
+- No yellow (oil #e3c94f) text anywhere. Liked the ticker strip, the earlier numbered ingredient list, chapter four.
+- Disliked: "One ounce of liquid gold" headline (emphasises smallness), the tilted trio photo, oversized bottle in the alcove, choppy spin.
+- Store photos (DSC023xx–DSC026xx) and a white full logo uploaded; in public/images and docs/assets.

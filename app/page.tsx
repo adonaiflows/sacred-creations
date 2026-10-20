@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import { BuyButton } from "@/components/ui/BuyButton";
 import { DetailTabs } from "@/components/ui/DetailTabs";
 import { GrowPhoto } from "@/components/ui/GrowPhoto";
@@ -26,6 +26,20 @@ const productJsonLd = {
 
 const faq = (q: string) => faqs.find((f) => f.q === q)?.a;
 
+function HeroPicture() {
+  const alt = "Two bottles of Liquid Gold on red sandstone with eucalyptus, baby's breath and soft linen";
+  const { props: { srcSet: wide } } = getImageProps({ alt, src: "/images/hero-two-bottles.jpg", width: 2400, height: 1350, sizes: "100vw", quality: 75 });
+  const { props: { srcSet: tall, ...img } } = getImageProps({ alt, src: "/images/bottle-sandstone.jpg", width: 1350, height: 2400, sizes: "100vw", quality: 75, preload: true });
+  return (
+    <picture className="absolute inset-0 -z-20">
+      <source media="(min-width: 768px)" srcSet={wide} />
+      <source srcSet={tall} />
+      {/* eslint-disable-next-line jsx-a11y/alt-text -- alt comes from getImageProps */}
+      <img {...img} fetchPriority="high" className="h-full w-full object-cover object-[50%_30%] md:object-center" />
+    </picture>
+  );
+}
+
 export default function Home() {
   return (
     <>
@@ -33,39 +47,36 @@ export default function Home() {
       <Header />
       <Reveal />
       <main id="top">
-        {/* 01 · HERO: text on parchment, the fence photo edge to edge on the right */}
-        <section className="sunwash relative grid md:min-h-svh md:grid-cols-2" aria-labelledby="hero-title">
-          <div className="relative order-2 flex flex-col justify-center px-4 pt-10 pb-16 sm:px-6 md:order-1 md:px-12 md:pt-28 md:pb-20 lg:px-20">
-            <Eyebrow>Liquid Gold · Frankincense face oil</Eyebrow>
-            <h1 id="hero-title" className="font-display text-[2.8rem] leading-[1.04] text-balance sm:text-6xl lg:text-[4.6rem]">
-              Deep hydration, <span className="accent text-copper">made with intention.</span>
-            </h1>
-            <p className="mt-6 max-w-md text-[17px] leading-relaxed text-muted sm:text-lg">
-              Cold-pressed organic castor and jojoba, steeped with raw frankincense resin and finished by hand in small batches. Two or three drops leave dry skin soft, supple and more even-looking.
-            </p>
-            <div id="hero-cta" className="mt-8 flex flex-col items-start gap-3">
-              <BuyButton location="hero" />
-              <p className="text-sm text-muted">
-                {product.size} · lasts {product.lasts} · in stock, made to order
+        {/* 01 · HERO: the store's own photo, full-bleed, with the words over it.
+            Wide two-bottle shot on desktop, the tall single bottle on phones. */}
+        <section className="on-dark relative isolate flex min-h-svh items-end overflow-hidden bg-ink text-parchment md:items-center" aria-labelledby="hero-title">
+          <HeroPicture />
+          <div
+            aria-hidden
+            className="absolute inset-0 -z-10 bg-linear-to-t from-ink/85 via-ink/20 to-transparent md:bg-[radial-gradient(42%_60%_at_50%_42%,rgba(46,30,20,0.62),rgba(46,30,20,0.25)_70%,rgba(46,30,20,0.1))]"
+          />
+          <div className="mx-auto w-full max-w-6xl px-4 pt-28 pb-12 sm:px-6 md:pb-28 md:text-center">
+            <div className="md:mx-auto md:max-w-[34rem]">
+              <p className="mb-4 text-[11px] font-medium tracking-[0.22em] text-parchment/90 uppercase sm:text-xs sm:tracking-[0.32em]">Liquid Gold · Frankincense face oil</p>
+              <h1 id="hero-title" className="font-display text-[2.7rem] leading-[1.04] text-balance [text-shadow:0_2px_24px_rgba(46,30,20,0.45)] sm:text-6xl lg:text-[4.4rem]">
+                Deep hydration, <span className="accent">made with intention.</span>
+              </h1>
+              <p className="mt-5 hidden text-lg leading-relaxed text-parchment/90 [text-shadow:0_1px_12px_rgba(46,30,20,0.5)] md:block">
+                Cold-pressed organic castor and jojoba, steeped with raw frankincense resin. Two or three drops leave dry skin soft and supple.
               </p>
+              <div id="hero-cta" className="mt-8 flex flex-col items-start gap-3 md:items-center">
+                <BuyButton location="hero" variant="light" />
+                <p className="text-sm text-parchment/85">
+                  {product.size} · lasts {product.lasts} · in stock
+                </p>
+              </div>
             </div>
-          </div>
-          <div className="relative order-1 h-[50svh] pt-20 md:order-2 md:h-auto md:pt-0">
-            <ParallaxPhoto
-              src="/images/bottle-fence.jpg"
-              alt="A frosted bottle of Liquid Gold with a bamboo dropper and white bulb, resting on a weathered wooden fence post with mountains behind"
-              sizes="(min-width: 768px) 50vw, 100vw"
-              priority
-              depth={6}
-              objectPosition="50% 48%"
-              className="h-full w-full"
-            />
           </div>
         </section>
 
         <Ticker
           className="border-y border-ink/10 bg-parchment-deep py-4 font-display text-lg text-ink-soft md:text-xl"
-          items={["Cold-pressed castor", "Organic jojoba", "Raw frankincense resin", "Made to order", "Albuquerque, New Mexico", "21 days on the altar", "Nourishment over noise"]}
+          items={["Cold-pressed castor", "Organic jojoba", "Raw frankincense resin", "Non-comedogenic", "Albuquerque, New Mexico", "21 days on the altar", "Nourishment over noise"]}
         />
 
         {/* 02 · STORY: the label's own words */}
@@ -100,21 +111,21 @@ export default function Home() {
         <section id="bottle" className="wall relative overflow-hidden" aria-labelledby="bottle-title">
           <WalkIn className="mx-auto grid min-h-svh max-w-6xl items-center gap-12 px-4 py-20 sm:px-6 md:grid-cols-[1.05fr_0.95fr] md:gap-16">
             <div className="niche relative mx-auto aspect-[3/5] w-full max-w-[400px] rounded-t-[999px] rounded-b-md">
-              <SpinViewer className="absolute inset-x-[8%] top-[6%] bottom-[3%]" />
+              <SpinViewer className="absolute inset-x-[10%] top-[24%] bottom-[4%]" />
             </div>
             <div className="paper rounded-[28px] p-7 shadow-[0_30px_70px_-30px_rgba(46,30,20,0.6)] ring-1 ring-ink/10 md:p-10" data-reveal>
               <Eyebrow>Chapter one · The bottle</Eyebrow>
               <h2 id="bottle-title" className="font-display text-4xl leading-tight md:text-[3.2rem]">
-                One ounce of <span className="accent text-copper">liquid gold.</span>
+                Golden from <span className="accent text-copper">every angle.</span>
               </h2>
               <p className="mt-5 max-w-md text-muted md:text-lg">
-                Frosted glass, a bamboo dropper and a parchment label you&apos;ll want to keep on display. Turn it around to read the back.
+                Frosted glass, a bamboo dropper and a hand-finished parchment label made to be kept on display. Turn it around to read the back.
               </p>
               <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-ink/10 bg-ink/10">
                 {[
-                  ["Size", "1 fl oz"],
                   ["Lasts", "6–8 weeks daily"],
                   ["Use", "2–3 drops, AM or PM"],
+                  ["Skin feel", "Non-comedogenic"],
                   ["Ships", "US, via USPS"],
                 ].map(([k, v]) => (
                   <div key={k} className="bg-parchment/90 p-4">
@@ -128,32 +139,40 @@ export default function Home() {
           </WalkIn>
         </section>
 
-        {/* 04 · INGREDIENTS: one photo opens up to full height as you scroll */}
-        <section id="ingredients" aria-labelledby="ingredients-title">
-          <GrowPhoto
-            src="/images/bottle-trio.jpg"
-            alt="Three bottles of Liquid Gold standing on red sandstone, glowing yellow in the afternoon light"
-            objectPosition="50% 52%"
-          >
-            <div className="w-full bg-linear-to-t from-ink/80 to-transparent px-4 pt-24 pb-14 text-parchment sm:px-6 md:mx-auto md:flex md:max-w-6xl md:justify-between md:bg-none md:p-0 md:text-ink">
-              <p className="font-display text-4xl leading-tight md:max-w-[15rem] md:text-5xl">Four ingredients.</p>
-              <p className="accent text-4xl leading-tight md:max-w-[15rem] md:text-right md:text-5xl md:text-copper">Nothing else.</p>
-            </div>
-          </GrowPhoto>
-          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
-            <div className="max-w-xl" data-reveal>
+        {/* 04 · INGREDIENTS: sticky heading with the bottle beside the numbered list */}
+        <section id="ingredients" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28" aria-labelledby="ingredients-title">
+          <div className="grid gap-12 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
+            <div className="md:sticky md:top-24 md:self-start" data-reveal>
               <Eyebrow>Chapter two · What&apos;s inside</Eyebrow>
               <h2 id="ingredients-title" className="font-display text-4xl leading-tight md:text-5xl">
-                All-natural, handcrafted, <span className="accent text-copper">every one on the label.</span>
+                Four ingredients. <span className="accent text-copper">Nothing else.</span>
               </h2>
+              <p className="mt-4 text-muted md:text-lg">All-natural, non-comedogenic and handcrafted, with every ingredient printed on the label.</p>
+              <ul className="mt-6 flex flex-wrap gap-2 text-xs tracking-[0.16em] text-ink-soft uppercase">
+                {["Non-comedogenic", "Organic oils", "Four ingredients"].map((t) => (
+                  <li key={t} className="rounded-full border border-copper/40 bg-parchment/70 px-3 py-1.5">{t}</li>
+                ))}
+              </ul>
+              <div className="relative mt-10 aspect-[4/5] w-full max-w-[420px] overflow-hidden rounded-t-[999px] rounded-b-[28px] shadow-[0_30px_60px_-35px_rgba(46,30,20,0.5)] ring-1 ring-ink/10">
+                <Image
+                  src="/images/label-closeup.jpg"
+                  alt="Close-up of the Liquid Gold label listing cold-pressed castor oil, cold-pressed jojoba oil, raw frankincense resin and frankincense essential oil, all organic"
+                  fill
+                  sizes="(min-width: 768px) 420px, 92vw"
+                  className="object-cover"
+                  style={{ objectPosition: "50% 60%" }}
+                />
+              </div>
             </div>
-            <ol className="mt-14 grid gap-px overflow-hidden rounded-[28px] border border-ink/10 bg-ink/10 md:grid-cols-2">
+            <ol className="divide-y divide-ink/10 border-y border-ink/10 md:mt-24">
               {ingredients.map((i, n) => (
-                <li key={i.name} className="bg-parchment p-8 md:p-10" data-reveal>
-                  <span className="font-display text-5xl text-copper/70">0{n + 1}</span>
-                  <h3 className="mt-6 font-display text-2xl md:text-3xl">{i.name}</h3>
-                  <p className="mt-1 text-xs tracking-[0.2em] text-sage uppercase">{i.note}</p>
-                  <p className="mt-4 leading-relaxed text-muted">{i.body}</p>
+                <li key={i.name} className="grid grid-cols-[auto_1fr] gap-6 py-8" data-reveal>
+                  <span className="font-display text-2xl text-copper">0{n + 1}</span>
+                  <div>
+                    <h3 className="font-display text-2xl md:text-3xl">{i.name}</h3>
+                    <p className="mt-1 text-xs tracking-[0.2em] text-sage uppercase">{i.note}</p>
+                    <p className="mt-3 leading-relaxed text-muted">{i.body}</p>
+                  </div>
                 </li>
               ))}
             </ol>
@@ -162,44 +181,58 @@ export default function Home() {
 
         {/* 05 · RITUAL: the three-step standard as numbered cards */}
         <section id="ritual" className="on-dark relative overflow-hidden bg-ink text-parchment" aria-labelledby="ritual-title">
-          <Spirograph className="pointer-events-none absolute -top-40 -right-40 h-[640px] w-[640px] text-oil/15" />
+          <Spirograph className="pointer-events-none absolute -top-40 -right-40 h-[640px] w-[640px] text-sandstone/15" />
           <div className="relative mx-auto flex min-h-svh max-w-6xl flex-col justify-center px-4 py-24 sm:px-6">
             <div className="max-w-2xl" data-reveal>
-              <p className="mb-4 text-xs font-medium tracking-[0.32em] text-oil uppercase">Chapter three · The Sacred Creations Standard</p>
+              <p className="mb-4 text-xs font-medium tracking-[0.32em] text-sandstone uppercase">Chapter three · The Sacred Creations Standard</p>
               <h2 id="ritual-title" className="font-display text-4xl leading-tight md:text-[3.4rem]">
-                Made slowly, <span className="accent text-oil">on purpose.</span>
+                Made slowly, <span className="accent text-sandstone">on purpose.</span>
               </h2>
               <p className="mt-5 max-w-md leading-relaxed text-parchment/75">
-                Every bottle is made to order in Albuquerque, New Mexico, and passes through the same three steps before it reaches you.
+                Every batch is made by hand in Albuquerque, New Mexico, and passes through the same three steps before it reaches you.
               </p>
             </div>
             <ol className="mt-14 grid gap-5 md:grid-cols-3">
               {standard.map((s) => (
                 <li key={s.title} className="flex flex-col rounded-[28px] border border-parchment/15 bg-ink-soft/60 p-8" data-reveal>
-                  <span className="font-display text-6xl text-oil/80">{s.step}</span>
+                  <span className="font-display text-6xl text-sandstone/80">{s.step}</span>
                   <h3 className="mt-10 font-display text-3xl">{s.title}</h3>
                   <p className="mt-3 leading-relaxed text-parchment/75">{s.body}</p>
                 </li>
               ))}
             </ol>
-            <figure className="mt-16 max-w-3xl border-l border-oil/50 pl-6" data-reveal>
-              <p className="text-xs tracking-[0.28em] text-oil uppercase">Affirmation for daily ritual</p>
+            <figure className="mt-16 max-w-3xl border-l border-sandstone/50 pl-6" data-reveal>
+              <p className="text-xs tracking-[0.28em] text-sandstone uppercase">Affirmation for daily ritual</p>
               <blockquote className="mt-3 font-display text-2xl leading-snug md:text-3xl">&ldquo;{affirmation}&rdquo;</blockquote>
               <figcaption className="mt-3 text-sm text-parchment/70">From the Liquid Gold label</figcaption>
             </figure>
           </div>
         </section>
 
+        {/* THE DROP: one photo opens up to full height as you scroll */}
+        <section aria-label="How it goes on">
+          <GrowPhoto
+            src="/images/dropper-cheek-tall.jpg"
+            alt="A glass dropper releasing a drop of Liquid Gold onto a cheek"
+            objectPosition="50% 45%"
+          >
+            <div className="w-full bg-linear-to-t from-ink/80 to-transparent px-4 pt-24 pb-14 text-parchment sm:px-6 md:mx-auto md:flex md:max-w-6xl md:justify-between md:bg-none md:p-0 md:text-ink">
+              <p className="font-display text-4xl leading-tight md:max-w-[15rem] md:text-5xl">Two or three drops.</p>
+              <p className="accent text-4xl leading-tight md:max-w-[15rem] md:text-right md:text-5xl md:text-copper">Pressed into damp skin.</p>
+            </div>
+          </GrowPhoto>
+        </section>
+
         {/* 06 · EDITORIAL: full-height photo beside a quiet call to buy */}
         <section className="grid md:min-h-svh md:grid-cols-2" aria-labelledby="moment-title">
-          <div className="relative h-[80svh] md:h-auto">
+          <div className="paper flex items-center justify-center px-4 py-12 sm:px-6 md:py-16">
             <Image
               src="/images/bottle-woodchips.jpg"
               alt="Close-up of Liquid Gold on wood chips: frosted glass with golden oil, a bamboo dropper and the parchment label"
-              fill
-              sizes="(min-width: 768px) 50vw, 100vw"
-              className="object-cover"
-              style={{ objectPosition: "55% 40%" }}
+              width={1800}
+              height={3199}
+              sizes="(min-width: 768px) 46svh, 90vw"
+              className="h-auto w-full max-w-[420px] rounded-t-[999px] rounded-b-[28px] shadow-[0_40px_80px_-40px_rgba(46,30,20,0.6)] ring-1 ring-ink/10 md:h-[84svh] md:w-auto md:max-w-none"
             />
           </div>
           <div className="sunwash flex flex-col justify-center px-4 py-20 sm:px-6 md:px-12 lg:px-20" data-reveal>
@@ -228,7 +261,7 @@ export default function Home() {
                     label: "Ingredients",
                     content: (
                       <div className="grid gap-6 md:grid-cols-[1fr_1.2fr]">
-                        <p className="font-display text-2xl leading-snug">Four ingredients, all organic, nothing else.</p>
+                        <p className="font-display text-2xl leading-snug">Four ingredients, non-comedogenic, nothing else.</p>
                         <p className="leading-relaxed text-muted">{faq("What exactly is in it?")}</p>
                       </div>
                     ),
@@ -249,7 +282,7 @@ export default function Home() {
                     label: "Shipping",
                     content: (
                       <div className="grid gap-6 md:grid-cols-[1fr_1.2fr]">
-                        <p className="font-display text-2xl leading-snug">Made to order, shipped in the US.</p>
+                        <p className="font-display text-2xl leading-snug">Shipped within the US by USPS.</p>
                         <div className="space-y-4 leading-relaxed text-muted">
                           <p>{faq("When will it ship?")}</p>
                           <p>{faq("What if it isn't right for me?")}</p>
@@ -280,9 +313,9 @@ export default function Home() {
         <section id="final-cta" className="on-dark relative flex min-h-[80svh] items-center overflow-hidden bg-copper-deep text-parchment" aria-labelledby="final-title">
           <Spirograph className="pointer-events-none absolute top-1/2 left-1/2 h-[900px] w-[900px] -translate-x-1/2 -translate-y-1/2 text-parchment/10" />
           <div className="relative mx-auto flex max-w-4xl flex-col items-center px-4 py-20 text-center sm:px-6">
-            <LogoMark className="mb-8 h-14 w-14 text-oil" />
+            <LogoMark className="mb-8 h-14 w-14 text-sandstone" />
             <h2 id="final-title" className="font-display text-5xl leading-tight md:text-7xl">
-              Ready <span className="accent text-oil">when you are.</span>
+              Ready <span className="accent text-sandstone">when you are.</span>
             </h2>
             <p className="mt-5 max-w-md text-parchment/80">I am grounded. I am pure. I am golden.</p>
             <BuyButton location="footer" variant="light" className="mt-10" />
@@ -294,7 +327,7 @@ export default function Home() {
       <footer className="on-dark bg-ink text-parchment/70">
         <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 pt-10 pb-6 text-sm sm:px-6 md:flex-row md:items-center md:justify-between">
           <div className="flex items-center gap-3">
-            <LogoMark className="h-8 w-8 text-oil" />
+            <LogoMark className="h-8 w-8 text-sandstone" />
             <p className="tracking-[0.32em] text-parchment uppercase">Sacred Creations</p>
           </div>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">

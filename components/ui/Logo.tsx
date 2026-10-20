@@ -23,13 +23,13 @@ export function LogoMark({ className = "", strokeWidth = 1.6 }: { className?: st
   );
 }
 
-export function Wordmark({ className = "" }: { className?: string }) {
+export function Wordmark({ className = "", light = false }: { className?: string; light?: boolean }) {
   return (
     <span className={`inline-flex items-center gap-3 ${className}`}>
-      <LogoMark className="h-9 w-9 text-copper" />
+      <LogoMark className={`h-9 w-9 ${light ? "text-parchment" : "text-copper"}`} />
       <span className="flex flex-col leading-none">
         <span className="font-sans text-[15px] font-medium tracking-[0.32em] uppercase">Sacred Creations</span>
-        <span className="mt-1 font-sans text-[9px] tracking-[0.34em] text-muted uppercase">Handmade with intention</span>
+        <span className={`mt-1 font-sans text-[9px] tracking-[0.34em] uppercase ${light ? "text-parchment/80" : "text-muted"}`}>Handmade with intention</span>
       </span>
     </span>
   );
