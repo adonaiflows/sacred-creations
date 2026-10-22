@@ -25,7 +25,7 @@ export const ingredients = [
   {
     name: "Cold-Pressed Castor Oil",
     note: "Organic",
-    body: "Rich and cushioning. It helps lock in moisture so skin stays soft through the day.",
+    body: "Nature's botox. It helps lock in moisture so skin stays soft through the day.",
   },
   {
     name: "Cold-Pressed Jojoba Oil",
