@@ -5,7 +5,6 @@ import { DetailTabs } from "@/components/ui/DetailTabs";
 import { GrowPhoto } from "@/components/ui/GrowPhoto";
 import { LogoMark } from "@/components/ui/Logo";
 import { Eyebrow } from "@/components/ui/Section";
-import { SpinViewer } from "@/components/ui/SpinViewer";
 import { Spirograph } from "@/components/ui/Spirograph";
 import { WalkIn } from "@/components/ui/WalkIn";
 import { affirmation, comingSoon, faqs, ingredients, liquidGold, ritual, stockists } from "@/lib/site";
@@ -13,7 +12,7 @@ import { affirmation, comingSoon, faqs, ingredients, liquidGold, ritual, stockis
 const faq = (q: string) => faqs.find((f) => f.q === q)?.a;
 
 /* THE SHOP WALL: a limewash wall with two reclaimed-wood shelves. Liquid Gold stands on the top
-   shelf and turns when dragged; the lower shelf holds tags for what's coming next. */
+   shelf; the lower shelf holds tags for what's coming next. */
 export function ShopWall() {
   return (
     <section id="shop" className="wall relative overflow-hidden" aria-labelledby="shop-title">
@@ -24,14 +23,22 @@ export function ShopWall() {
             One oil, <span className="accent text-copper-deep">given the whole shelf.</span>
           </h2>
           <p className="mt-4 text-ink-soft md:text-lg">
-            Liquid Gold is our only product, on purpose, so all the focus goes into one oil. Turn the bottle to read the back of the label.
+            Liquid Gold is our only product, on purpose, so all the focus goes into one oil.
           </p>
         </div>
 
         {/* Top shelf: Liquid Gold */}
         <div className="relative mx-auto mt-16 w-full max-w-4xl">
           <div className="relative flex items-end justify-center gap-6 px-4 sm:gap-12">
-            <SpinViewer grounded className="relative z-10 -mb-[6px] h-[min(44svh,400px)] w-[min(36vw,150px)] sm:h-[min(52svh,440px)] sm:w-[190px]" />
+            {/* A still, straight-on photo of the real bottle, cut out so it stands on the shelf. */}
+            <Image
+              src="/images/bottle-front.webp"
+              alt="Liquid Gold in frosted glass with a bamboo dropper. The label reads Sacred Creations, Liquid Gold, all-natural handcrafted skincare, and lists cold-pressed castor oil, cold-pressed jojoba oil, raw frankincense resin and frankincense essential oil."
+              width={450}
+              height={1400}
+              sizes="(min-width: 640px) 170px, 130px"
+              className="relative z-10 -mb-[4px] h-[min(44svh,400px)] w-auto drop-shadow-[0_14px_14px_rgba(50,25,10,0.35)] sm:h-[min(58svh,520px)]"
+            />
             <div className="tag relative -mb-[2px] w-[min(44vw,230px)] rotate-[-2deg] rounded-sm p-4 text-ink sm:p-5">
               <p className="font-display text-xl leading-tight sm:text-2xl">{liquidGold.name}</p>
               <p className="mt-1 text-[11px] tracking-[0.18em] text-ink-soft uppercase">{liquidGold.kind} · {liquidGold.size}</p>
