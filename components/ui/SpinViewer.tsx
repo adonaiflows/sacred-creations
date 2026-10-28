@@ -11,7 +11,7 @@ const RESUME_AFTER = 3500; // ms after the last touch before the idle turn picks
 const src = (i: number) => `/spin/${String(i).padStart(2, "0")}.webp`;
 const wrap = (p: number) => ((p % FRAMES) + FRAMES) % FRAMES;
 
-export function SpinViewer({ className = "" }: { className?: string }) {
+export function SpinViewer({ className = "", grounded = false }: { className?: string; grounded?: boolean }) {
   const box = useRef<HTMLDivElement>(null);
   const a = useRef<HTMLImageElement>(null);
   const b = useRef<HTMLImageElement>(null);
@@ -140,7 +140,7 @@ export function SpinViewer({ className = "" }: { className?: string }) {
       className={`group cursor-grab touch-pan-y select-none active:cursor-grabbing ${className}`}
     >
       {/* Bottle floats on its own; the soft contact shadow breathes with it. */}
-      <div className="absolute inset-x-0 top-0 bottom-[13%] drop-shadow-[0_24px_30px_rgba(60,30,10,0.18)] motion-safe:animate-[float_6s_ease-in-out_infinite]">
+      <div className={`absolute inset-x-0 top-0 drop-shadow-[0_24px_30px_rgba(60,30,10,0.18)] ${grounded ? "bottom-0" : "bottom-[13%] motion-safe:animate-[float_6s_ease-in-out_infinite]"}`}>
         {/* eslint-disable-next-line @next/next/no-img-element -- transparent frames, swapped every paint */}
         <img
           ref={a}
@@ -158,13 +158,14 @@ export function SpinViewer({ className = "" }: { className?: string }) {
       </div>
       <div
         aria-hidden
+        hidden={grounded}
         className="pointer-events-none absolute bottom-[9%] left-1/2 h-[4%] w-[52%] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(closest-side,rgba(52,28,12,0.42),rgba(52,28,12,0.12)_60%,transparent)] blur-[3px] motion-safe:animate-[shadow-breathe_6s_ease-in-out_infinite]"
       />
       <div
         aria-hidden
-        className={`pointer-events-none absolute inset-x-0 bottom-0 flex justify-center transition-opacity duration-700 ${touched ? "opacity-0" : "opacity-100"}`}
+        className={`pointer-events-none absolute inset-x-0 flex justify-center transition-opacity ${grounded ? "-bottom-[5.5rem]" : "bottom-0"} duration-700 ${touched ? "opacity-0" : "opacity-100"}`}
       >
-        <span className="inline-flex items-center gap-3 rounded-full bg-parchment/80 px-4 py-2 text-[11px] font-medium tracking-[0.24em] text-ink uppercase backdrop-blur">
+        <span className="inline-flex items-center gap-3 whitespace-nowrap rounded-full bg-parchment/80 px-4 py-2 text-[11px] font-medium tracking-[0.24em] text-ink uppercase backdrop-blur">
           <span className="text-copper">&larr;</span> Drag to turn <span className="text-copper">&rarr;</span>
         </span>
       </div>

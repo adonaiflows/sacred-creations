@@ -23,11 +23,11 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Liquid Gold Frankincense Face Oil | Sacred Creations",
   description:
-    "Liquid Gold is a handmade face oil of cold-pressed organic castor and jojoba with raw frankincense resin. Two or three drops leave dry skin soft, hydrated and more even-looking. $66 for 1 oz.",
+    "Liquid Gold is a handmade face oil of certified organic castor and jojoba with raw frankincense resin. Non-comedogenic and hand-crafted in New Mexico. $66 for 1 oz.",
   openGraph: {
     title: "Liquid Gold Frankincense Face Oil | Sacred Creations",
     description:
-      "Organic frankincense, jojoba and castor, hand-crafted in small batches with intention. $66 for 1 oz.",
+      "Frankincense with certified organic jojoba and castor, hand-crafted in small batches with intention. $66 for 1 oz.",
     url: "/",
     siteName: "Sacred Creations",
     type: "website",
