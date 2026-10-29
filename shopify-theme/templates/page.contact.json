@@ -1,0 +1,39 @@
+{
+  "sections": {
+    "contact": {
+      "type": "sc-contact",
+      "settings": {},
+      "blocks": {
+        "contact-1": {
+          "type": "card",
+          "settings": {
+            "title": "Write to us",
+            "body": "<p><a href=\"mailto:nmsacredcreations@gmail.com\">nmsacredcreations@gmail.com</a></p>"
+          }
+        },
+        "contact-2": {
+          "type": "card",
+          "settings": {
+            "title": "Follow along",
+            "body": "<p><a href=\"https://instagram.com/sacredcreations.shop\">Instagram</a></p><p><a href=\"https://tiktok.com/@sacredcreations.shop\">TikTok</a></p>"
+          }
+        },
+        "contact-3": {
+          "type": "card",
+          "settings": {
+            "title": "Find it in person",
+            "body": "<p>Daily Rituals / Stickks &amp; Stones</p><p>Albuquerque, New Mexico</p>"
+          }
+        }
+      },
+      "block_order": [
+        "contact-1",
+        "contact-2",
+        "contact-3"
+      ]
+    }
+  },
+  "order": [
+    "contact"
+  ]
+}

@@ -1,0 +1,50 @@
+{%- comment -%}
+  The one primary call to action. Goes straight to Shopify checkout with one bottle in the cart
+  (a cart permalink), so a visitor can buy from anywhere on the page in one tap.
+
+  Accepts:
+  - product: the product to sell (defaults to the featured product)
+  - location: where the button sits, kept in data-cta for analytics
+  - style: 'copper' (default) or 'light' for dark backgrounds
+  - label: button text (default "Buy <product title>")
+  - class: extra classes
+  - show_price: false to hide the price (default true)
+{%- endcomment -%}
+{%- liquid
+  assign p = product
+  if p == blank or p.id == blank
+    capture handle
+      render 'sc-product'
+    endcapture
+    assign handle = handle | strip
+    assign p = all_products[handle]
+  endif
+  assign v = p.selected_or_first_available_variant
+  assign text = label
+  if text == blank
+    assign text = 'Buy ' | append: p.title
+  endif
+
+  if style == 'light'
+    assign look = 'bg-parchment text-copper-deep hover:bg-white shadow-[0_12px_30px_-12px_rgba(0,0,0,0.45)]'
+  else
+    assign look = 'bg-copper text-parchment hover:bg-copper-deep shadow-[0_12px_30px_-12px_rgba(132,64,31,0.7)]'
+  endif
+  assign base = 'group inline-flex min-h-12 items-center justify-center gap-3 rounded-full px-7 py-3.5 text-[15px] font-medium tracking-[0.08em] uppercase transition active:translate-y-px'
+-%}
+{%- if p.id == blank -%}
+  {%- comment -%} No product found: link to the catalog rather than show a broken button. {%- endcomment -%}
+  <a href="{{ routes.all_products_collection_url }}" data-cta="{{ location }}" class="{{ base }} {{ look }} {{ class }}">Shop</a>
+{%- elsif v.available -%}
+  <a href="{{ routes.cart_url }}/{{ v.id }}:1" data-cta="{{ location }}" class="{{ base }} {{ look }} {{ class }}">
+    <span>{{ text }}</span>
+    {%- unless show_price == false -%}
+      <span aria-hidden="true" class="h-4 w-px bg-current opacity-40"></span>
+      <span>{{ v.price | money_without_trailing_zeros }}</span>
+    {%- endunless -%}
+  </a>
+{%- else -%}
+  <a href="{{ p.url }}" data-cta="{{ location }}" class="{{ base }} {{ look }} {{ class }} opacity-80">
+    <span>Sold out</span>
+  </a>
+{%- endif -%}

@@ -1,0 +1,16 @@
+{%- comment -%} A product on a shelf: photo, then a paper tag with name and price. Accepts: card_product {%- endcomment -%}
+<li class="flex flex-col items-center">
+  <a href="{{ card_product.url }}" class="group flex flex-col items-center">
+    <span class="flex h-64 items-end">
+      {%- if card_product.featured_image -%}
+        {{ card_product.featured_image | image_url: width: 600 | image_tag: widths: '300, 600', sizes: '220px', class: 'max-h-64 w-auto object-contain drop-shadow-[0_14px_14px_rgba(50,25,10,0.35)]', loading: 'lazy' }}
+      {%- endif -%}
+    </span>
+    <span class="tag mt-4 block rounded-sm px-5 py-3 text-center">
+      <span class="block font-display text-xl text-ink group-hover:text-copper-deep">{{ card_product.title }}</span>
+      <span class="block text-xs tracking-[0.2em] text-copper-deep uppercase">
+        {%- if card_product.available -%}{{ card_product.price | money_without_trailing_zeros }}{%- else -%}Sold out{%- endif -%}
+      </span>
+    </span>
+  </a>
+</li>

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source not "../shopify-theme";
 
 /* Palette taken from the Liquid Gold label, logo and product photos (docs/assets). */
 @theme {

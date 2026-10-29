@@ -1,0 +1,82 @@
+<footer class="on-dark bg-ink text-parchment/70">
+  <div class="mx-auto grid max-w-6xl gap-10 px-4 pt-14 pb-8 text-sm sm:px-6 md:grid-cols-[1.3fr_1fr_1fr_1fr]">
+    <div>
+      <div class="flex items-center gap-3">
+        {% render 'logo-mark', class: 'h-9 w-9 text-sandstone' %}
+        <p class="tracking-[0.32em] text-parchment uppercase">{{ shop.name }}</p>
+      </div>
+      {%- if section.settings.blurb != blank -%}
+        <p class="mt-4 max-w-xs leading-relaxed">{{ section.settings.blurb }}</p>
+      {%- endif -%}
+    </div>
+    <div>
+      <p class="text-xs tracking-[0.24em] text-parchment uppercase">Visit</p>
+      <ul class="mt-4 space-y-2">
+        {%- if section.settings.menu != blank and section.settings.menu.links.size > 0 -%}
+          {%- for link in section.settings.menu.links -%}
+            <li><a class="hover:text-parchment" href="{{ link.url }}">{{ link.title }}</a></li>
+          {%- endfor -%}
+        {%- else -%}
+          <li><a class="hover:text-parchment" href="{{ routes.all_products_collection_url }}">Shop</a></li>
+          <li><a class="hover:text-parchment" href="/pages/about">About</a></li>
+          <li><a class="hover:text-parchment" href="/pages/contact">Contact</a></li>
+          <li><a class="hover:text-parchment" href="{{ routes.cart_url }}">Cart</a></li>
+        {%- endif -%}
+      </ul>
+    </div>
+    <div>
+      <p class="text-xs tracking-[0.24em] text-parchment uppercase">Find us in person</p>
+      <ul class="mt-4 space-y-2">
+        {%- for block in section.blocks -%}
+          <li {{ block.shopify_attributes }}>
+            {{ block.settings.name }}<br>
+            <span class="text-parchment/60">{{ block.settings.place }}</span>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+    <div>
+      <p class="text-xs tracking-[0.24em] text-parchment uppercase">Say hello</p>
+      <ul class="mt-4 space-y-2">
+        {%- if section.settings.email != blank -%}
+          <li><a class="break-all hover:text-parchment" href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></li>
+        {%- endif -%}
+        {%- if section.settings.instagram != blank -%}
+          <li><a class="hover:text-parchment" href="{{ section.settings.instagram }}">Instagram</a></li>
+        {%- endif -%}
+        {%- if section.settings.tiktok != blank -%}
+          <li><a class="hover:text-parchment" href="{{ section.settings.tiktok }}">TikTok</a></li>
+        {%- endif -%}
+      </ul>
+    </div>
+  </div>
+  <div class="mx-auto flex max-w-6xl flex-col gap-3 border-t border-parchment/10 px-4 pt-6 pb-28 text-xs text-parchment/60 sm:px-6 md:flex-row md:justify-between md:pb-10">
+    <p>{{ section.settings.disclaimer }}</p>
+    <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "sc-footer",
+  "settings": [
+    { "type": "textarea", "id": "blurb", "label": "About line", "default": "Intentional, natural, heart-crafted. Made in small batches in New Mexico." },
+    { "type": "link_list", "id": "menu", "label": "Menu", "info": "Leave empty for Shop, About, Contact and Cart." },
+    { "type": "text", "id": "email", "label": "Email", "default": "nmsacredcreations@gmail.com" },
+    { "type": "text", "id": "instagram", "label": "Instagram link", "default": "https://instagram.com/sacredcreations.shop" },
+    { "type": "text", "id": "tiktok", "label": "TikTok link", "default": "https://tiktok.com/@sacredcreations.shop" },
+    { "type": "textarea", "id": "disclaimer", "label": "Disclaimer", "default": "Liquid Gold is a cosmetic and has not been evaluated by the FDA. It is not intended to diagnose, treat, cure or prevent any disease." }
+  ],
+  "blocks": [
+    {
+      "type": "stockist",
+      "name": "Stockist",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Shop name" },
+        { "type": "text", "id": "place", "label": "Town" }
+      ]
+    }
+  ]
+}
+{% endschema %}

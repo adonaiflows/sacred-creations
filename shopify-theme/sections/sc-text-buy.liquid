@@ -1,0 +1,27 @@
+<section class="wall" aria-labelledby="text-buy-title-{{ section.id }}">
+  <div class="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 md:py-28" data-reveal>
+    {% render 'eyebrow', text: section.settings.eyebrow, color: 'text-copper-deep' %}
+    <h2 id="text-buy-title-{{ section.id }}" class="font-display text-4xl leading-tight md:text-5xl">
+      {{ section.settings.heading }} <span class="accent text-copper-deep">{{ section.settings.heading_accent }}</span>
+    </h2>
+    <div class="rte mx-auto mt-5 max-w-lg text-ink-soft md:text-lg">{{ section.settings.text }}</div>
+    {%- if section.settings.show_buy -%}
+      <div class="mt-10">{% render 'buy-button', location: 'text-buy' %}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Text and buy",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small line above", "default": "What's next" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "More than" },
+    { "type": "text", "id": "heading_accent", "label": "Heading, italic part", "default": "skincare." },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Sacred Creations is growing. Ceramics, jewelry, clothing and a matcha pop-up are on their way.</p>" },
+    { "type": "checkbox", "id": "show_buy", "label": "Show buy button", "default": true }
+  ],
+  "presets": [{ "name": "Text and buy" }]
+}
+{% endschema %}

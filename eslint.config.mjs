@@ -1,2 +1,2 @@
 import next from "eslint-config-next";
-export default [...next, { ignores: [".next/**", "node_modules/**"] }];
+export default [...next, { ignores: [".next/**", "node_modules/**", "shopify-theme/**"] }];

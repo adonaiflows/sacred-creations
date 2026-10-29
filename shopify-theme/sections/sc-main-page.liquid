@@ -1,0 +1,10 @@
+<section class="wall min-h-[70svh]">
+  <div class="mx-auto max-w-3xl px-4 pt-32 pb-24 sm:px-6">
+    <h1 class="font-display text-4xl leading-tight md:text-5xl">{{ page.title }}</h1>
+    <div class="paper rte mt-10 rounded-[28px] p-7 leading-relaxed text-ink-soft ring-1 ring-ink/10 md:p-10">{{ page.content }}</div>
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Page", "tag": "div", "settings": [] }
+{% endschema %}

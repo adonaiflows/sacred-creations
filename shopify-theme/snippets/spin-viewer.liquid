@@ -1,0 +1,31 @@
+{%- comment -%}
+  A turntable of the real bottle: 40 evenly spaced frames (assets/spin-00.webp to spin-39.webp),
+  cut out and straightened from the client's photos. It turns slowly on its own; drag, swipe or use
+  the arrow keys to turn it. assets/theme.js runs it; without JS the first frame shows.
+
+  Accepts: class, alt
+{%- endcomment -%}
+<div
+  class="group cursor-grab touch-pan-y select-none active:cursor-grabbing {{ class }}"
+  role="slider"
+  tabindex="0"
+  aria-label="{{ alt | default: 'Liquid Gold bottle, turn to see the front and back label' | escape }}"
+  aria-valuemin="1"
+  aria-valuemax="40"
+  aria-valuenow="1"
+  aria-valuetext="View 1 of 40"
+  data-spin
+  data-frames="40"
+  data-first="{{ 'spin-00.webp' | asset_url }}"
+>
+  <div class="absolute inset-x-0 top-0 bottom-[13%] drop-shadow-[0_24px_30px_rgba(60,30,10,0.18)] motion-safe:animate-[float_6s_ease-in-out_infinite]">
+    <img src="{{ 'spin-00.webp' | asset_url }}" alt="Liquid Gold in frosted glass with a bamboo dropper, photographed all the way around so both sides of the label show" width="400" height="1152" draggable="false" loading="lazy" decoding="async" class="pointer-events-none absolute inset-0 h-full w-full object-contain object-bottom" data-spin-a>
+    <img src="{{ 'spin-01.webp' | asset_url }}" alt="" aria-hidden="true" width="400" height="1152" draggable="false" loading="lazy" decoding="async" class="pointer-events-none absolute inset-0 h-full w-full object-contain object-bottom opacity-0" data-spin-b>
+  </div>
+  <div aria-hidden="true" class="pointer-events-none absolute bottom-[9%] left-1/2 h-[4%] w-[52%] -translate-x-1/2 rounded-[50%] bg-[radial-gradient(closest-side,rgba(52,28,12,0.42),rgba(52,28,12,0.12)_60%,transparent)] blur-[3px] motion-safe:animate-[shadow-breathe_6s_ease-in-out_infinite]"></div>
+  <div aria-hidden="true" class="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center transition-opacity duration-700" data-spin-hint>
+    <span class="inline-flex items-center gap-3 rounded-full bg-parchment/80 px-4 py-2 text-[11px] font-medium tracking-[0.24em] whitespace-nowrap text-ink uppercase backdrop-blur">
+      <span class="text-copper">&larr;</span> Drag to turn <span class="text-copper">&rarr;</span>
+    </span>
+  </div>
+</div>

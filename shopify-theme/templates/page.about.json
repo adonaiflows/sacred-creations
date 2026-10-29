@@ -1,0 +1,96 @@
+{
+  "sections": {
+    "intro": {
+      "type": "sc-about-intro",
+      "settings": {}
+    },
+    "people": {
+      "type": "sc-people",
+      "settings": {},
+      "blocks": {
+        "people-1": {
+          "type": "person",
+          "settings": {
+            "name": "Kaylee Romero",
+            "role": "Maker",
+            "body": "<p>Kaylee makes every bottle of Liquid Gold by hand in New Mexico.</p>"
+          }
+        },
+        "people-2": {
+          "type": "person",
+          "settings": {
+            "name": "Adonai",
+            "role": "Business",
+            "body": "<p>Adonai runs the business side of Sacred Creations.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "people-1",
+        "people-2"
+      ]
+    },
+    "ritual": {
+      "type": "sc-ritual",
+      "settings": {},
+      "blocks": {
+        "ritual-1": {
+          "type": "step",
+          "settings": {
+            "phase": "Opening",
+            "title": "Cleansed",
+            "body": "Every single bottle is taken through a 3-part smoke process. First it is cleansed with white sage, followed by a blessing with palo santo and/or copal, and finished with the nourishment of sweet grass."
+          }
+        },
+        "ritual-2": {
+          "type": "step",
+          "settings": {
+            "phase": "Creation",
+            "title": "Hand-crafted",
+            "body": "Every ingredient is cared for one-by-one by loving hands. Intentionally alchemized into being: honored, revered, prayed upon."
+          }
+        },
+        "ritual-3": {
+          "type": "step",
+          "settings": {
+            "phase": "Refinement",
+            "title": "Charged",
+            "body": "The finished oil rests on our altar for a minimum of 21 days, continually prayed upon with love: amethyst for protection, rose quartz for self-love, citrine for abundance and tiger's eye for confidence."
+          }
+        }
+      },
+      "block_order": [
+        "ritual-1",
+        "ritual-2",
+        "ritual-3"
+      ]
+    },
+    "next": {
+      "type": "sc-text-buy",
+      "settings": {}
+    },
+    "stockists": {
+      "type": "sc-stockists",
+      "settings": {},
+      "blocks": {
+        "stockists-1": {
+          "type": "stockist",
+          "settings": {
+            "name": "Daily Rituals / Stickks & Stones",
+            "place": "Albuquerque, New Mexico"
+          }
+        }
+      },
+      "block_order": [
+        "stockists-1"
+      ]
+    }
+  },
+  "order": [
+    "intro",
+    "people",
+    "ritual",
+    "next",
+    "stockists"
+  ]
+}

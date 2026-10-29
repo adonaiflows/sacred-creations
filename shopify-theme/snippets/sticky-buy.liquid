@@ -1,0 +1,31 @@
+{%- comment -%}
+  Phone-only bar that slides up once the page's main buy button (#hero-cta) has scrolled away and
+  hides again at the closing call to buy (#final-cta). assets/theme.js shows it.
+{%- endcomment -%}
+{%- liquid
+  capture handle
+    render 'sc-product'
+  endcapture
+  assign handle = handle | strip
+  assign p = all_products[handle]
+  if template.name == 'product' and template.suffix == blank
+    assign p = product
+  endif
+  assign show = false
+  if p.available
+    if template.name == 'index' or template.name == 'product' and template.suffix == blank
+      assign show = true
+    endif
+  endif
+-%}
+{%- if show -%}
+  <div class="pointer-events-none invisible fixed inset-x-0 bottom-0 z-40 translate-y-full border-t border-ink/10 bg-parchment/95 px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur transition-transform duration-300 md:hidden" aria-hidden="true" inert data-sticky-buy>
+    <div class="flex items-center justify-between gap-3">
+      <div class="leading-tight">
+        <p class="font-display text-lg">{{ p.title }}</p>
+        <p class="text-xs text-muted">1 oz · 6–8 weeks of daily use</p>
+      </div>
+      {% render 'buy-button', product: p, location: 'sticky', label: 'Buy', class: 'min-h-11 px-5 py-2.5 text-sm' %}
+    </div>
+  </div>
+{%- endif -%}

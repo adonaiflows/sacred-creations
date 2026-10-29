@@ -1,0 +1,25 @@
+{%- layout none -%}
+<!doctype html>
+<html lang="{{ request.locale.iso_code }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your gift card | {{ shop.name }}</title>
+    {{ 'theme.css' | asset_url | stylesheet_tag }}
+    {{ content_for_header }}
+  </head>
+  <body class="font-sans">
+    <main class="wall flex min-h-svh items-center">
+      <div class="paper mx-auto max-w-md rounded-[28px] p-10 text-center ring-1 ring-ink/10">
+        <p class="text-xs tracking-[0.24em] text-muted uppercase">{{ shop.name }} gift card</p>
+        <p class="mt-4 font-display text-5xl">{{ gift_card.balance | money }}</p>
+        {%- if gift_card.expired or gift_card.enabled == false -%}
+          <p class="mt-2 text-copper-deep">This gift card can no longer be used.</p>
+        {%- endif -%}
+        <p class="mt-6 text-sm text-muted">Your code</p>
+        <p class="font-display text-2xl tracking-[0.12em]">{{ gift_card.code | format_code }}</p>
+        <a class="mt-8 inline-flex min-h-12 items-center rounded-full bg-copper px-7 text-parchment" href="{{ shop.url }}">Shop now</a>
+      </div>
+    </main>
+  </body>
+</html>

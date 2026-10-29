@@ -1,0 +1,23 @@
+<section class="wall min-h-svh">
+  <div class="mx-auto max-w-4xl px-4 pt-32 pb-24 sm:px-6">
+    <h1 class="font-display text-4xl md:text-5xl">Search</h1>
+    <form action="{{ routes.search_url }}" method="get" role="search" class="mt-8 flex gap-3">
+      <label for="q" class="sr-only">Search</label>
+      <input id="q" type="search" name="q" value="{{ search.terms | escape }}" class="min-h-12 flex-1 rounded-full border border-ink/20 bg-parchment px-5">
+      <button class="min-h-12 rounded-full bg-copper px-6 text-sm tracking-[0.12em] text-parchment uppercase">Search</button>
+    </form>
+    {%- if search.performed -%}
+      <ul class="mt-10 space-y-4">
+        {%- for item in search.results -%}
+          <li class="paper rounded-2xl p-5 ring-1 ring-ink/10"><a class="font-display text-xl hover:text-copper-deep" href="{{ item.url }}">{{ item.title }}</a></li>
+        {%- else -%}
+          <li class="text-ink-soft">Nothing found for &ldquo;{{ search.terms | escape }}&rdquo;.</li>
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Search", "tag": "div", "settings": [] }
+{% endschema %}

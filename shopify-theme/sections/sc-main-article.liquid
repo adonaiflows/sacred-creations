@@ -1,0 +1,14 @@
+<article class="wall min-h-svh">
+  <div class="mx-auto max-w-3xl px-4 pt-32 pb-24 sm:px-6">
+    <p class="text-sm text-muted">{{ article.published_at | date: '%B %-d, %Y' }}</p>
+    <h1 class="mt-2 font-display text-4xl md:text-5xl">{{ article.title }}</h1>
+    {%- if article.image -%}
+      {{ article.image | image_url: width: 1600 | image_tag: widths: '800, 1200, 1600', sizes: '(min-width: 768px) 720px, 92vw', class: 'mt-10 w-full rounded-[28px]', loading: 'eager' }}
+    {%- endif -%}
+    <div class="paper rte mt-10 rounded-[28px] p-7 leading-relaxed text-ink-soft ring-1 ring-ink/10 md:p-10">{{ article.content }}</div>
+  </div>
+</article>
+
+{% schema %}
+{ "name": "Article", "tag": "div", "settings": [] }
+{% endschema %}

@@ -1,0 +1,63 @@
+{%- comment -%}
+  Floating header. On the home page it sits over the dark hero photo, so the wordmark turns light.
+  Uses the chosen menu, or the built-in links when none is chosen.
+{%- endcomment -%}
+{%- liquid
+  assign light = false
+  if template.name == 'index'
+    assign light = true
+  endif
+  capture handle
+    render 'sc-product'
+  endcapture
+  assign handle = handle | strip
+  assign featured = all_products[handle]
+  assign featured_url = featured.url | default: routes.all_products_collection_url
+-%}
+{%- capture links -%}
+  {%- if section.settings.menu != blank and section.settings.menu.links.size > 0 -%}
+    {%- for link in section.settings.menu.links -%}
+      <a href="{{ link.url }}" class="LINKCLASS"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>
+    {%- endfor -%}
+  {%- else -%}
+    <a href="{{ routes.root_url }}#shop" class="LINKCLASS">Shop</a>
+    <a href="{{ featured_url }}" class="LINKCLASS">{{ featured.title | default: 'Liquid Gold' }}</a>
+    <a href="{{ featured_url }}#ritual" class="LINKCLASS">Ritual</a>
+    <a href="{{ section.settings.about_page.url | default: '/pages/about' }}" class="LINKCLASS">About</a>
+    <a href="{{ section.settings.contact_page.url | default: '/pages/contact' }}" class="LINKCLASS">Contact</a>
+  {%- endif -%}
+{%- endcapture -%}
+
+<header class="absolute inset-x-0 top-0 z-30">
+  <div class="mx-auto flex h-20 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
+    <a href="{{ routes.root_url }}" aria-label="{{ shop.name }}, home">
+      {% render 'wordmark', light: light %}
+    </a>
+    <nav aria-label="Main" class="hidden items-center gap-7 rounded-full bg-parchment/85 py-1.5 pr-1.5 pl-7 text-[13px] tracking-[0.12em] text-muted uppercase shadow-[0_8px_30px_-12px_rgba(46,30,20,0.35)] backdrop-blur lg:flex">
+      {{ links | replace: 'LINKCLASS', 'hover:text-ink' }}
+      <a href="{{ routes.cart_url }}" class="hover:text-ink">Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</a>
+      {% render 'buy-button', location: 'header', label: 'Buy', class: 'min-h-10 px-5 py-2 text-xs' %}
+    </nav>
+    <details class="group relative lg:hidden">
+      <summary class="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-full px-4 text-xs tracking-[0.2em] uppercase [&::-webkit-details-marker]:hidden {% if light %}bg-parchment/20 text-parchment backdrop-blur{% else %}bg-ink/5 text-ink{% endif %}">
+        Menu
+      </summary>
+      <nav aria-label="Main" class="absolute right-0 mt-2 flex w-56 flex-col rounded-2xl bg-parchment p-2 text-sm tracking-[0.12em] text-ink uppercase shadow-[0_20px_40px_-20px_rgba(46,30,20,0.5)] ring-1 ring-ink/10">
+        {{ links | replace: 'LINKCLASS', 'rounded-xl px-4 py-3 hover:bg-parchment-deep' }}
+        <a href="{{ routes.cart_url }}" class="rounded-xl px-4 py-3 hover:bg-parchment-deep">Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</a>
+      </nav>
+    </details>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "class": "sc-header",
+  "settings": [
+    { "type": "link_list", "id": "menu", "label": "Menu", "info": "Leave empty to use the built-in links: Shop, Liquid Gold, Ritual, About, Contact." },
+    { "type": "page", "id": "about_page", "label": "About page" },
+    { "type": "page", "id": "contact_page", "label": "Contact page" }
+  ]
+}
+{% endschema %}
