@@ -1,0 +1,58 @@
+{%- comment -%}
+  Full-bleed store photo with the words over it: the wide two-bottle shot on desktop and the tall
+  single bottle on phones. #hero-cta tells the phone buy bar when to appear.
+{%- endcomment -%}
+{%- liquid
+  capture handle
+    render 'sc-product'
+  endcapture
+  assign handle = handle | strip
+  assign p = all_products[handle]
+  assign alt = section.settings.alt
+-%}
+<section class="on-dark relative isolate flex min-h-svh items-end overflow-hidden bg-ink text-parchment md:items-center" aria-labelledby="hero-title-{{ section.id }}">
+  <div class="absolute inset-0 -z-20">
+    <div class="hidden h-full md:block">
+      {% render 'sc-image', image: section.settings.image_desktop, asset: 'hero-two-bottles', widths: '800,1600,2400', width: 2400, height: 1350, alt: alt, sizes: '100vw', priority: true, class: 'h-full w-full object-cover' %}
+    </div>
+    <div class="h-full md:hidden">
+      {% render 'sc-image', image: section.settings.image_mobile, asset: 'bottle-sandstone', widths: '800,1350', width: 1350, height: 2400, alt: alt, sizes: '100vw', priority: true, class: 'h-full w-full object-cover object-[50%_30%]' %}
+    </div>
+  </div>
+  <div aria-hidden="true" class="absolute inset-0 -z-10 bg-linear-to-t from-ink/85 via-ink/20 to-transparent md:bg-[radial-gradient(42%_60%_at_50%_42%,rgba(46,30,20,0.62),rgba(46,30,20,0.25)_70%,rgba(46,30,20,0.1))]"></div>
+  <div class="mx-auto w-full max-w-6xl px-4 pt-28 pb-12 sm:px-6 md:pb-28 md:text-center">
+    <div class="md:mx-auto md:max-w-[34rem]">
+      {% render 'eyebrow', text: section.settings.eyebrow, color: 'text-parchment/90' %}
+      <h1 id="hero-title-{{ section.id }}" class="font-display text-[2.7rem] leading-[1.04] text-balance [text-shadow:0_2px_24px_rgba(46,30,20,0.45)] sm:text-6xl lg:text-[4.4rem]">
+        {{ section.settings.heading }} <span class="accent">{{ section.settings.heading_accent }}</span>
+      </h1>
+      {%- if section.settings.text != blank -%}
+        <p class="mt-5 hidden text-lg leading-relaxed text-parchment/90 [text-shadow:0_1px_12px_rgba(46,30,20,0.5)] md:block">{{ section.settings.text }}</p>
+      {%- endif -%}
+      <div id="hero-cta" class="mt-8 flex flex-col items-start gap-3 md:items-center">
+        {% render 'buy-button', product: p, location: 'hero', style: 'light' %}
+        <p class="text-sm text-parchment/85">
+          {{ section.settings.note }}{% if p.available %} · in stock{% endif %}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "tag": "div",
+  "settings": [
+    { "type": "image_picker", "id": "image_desktop", "label": "Desktop photo", "info": "Wide photo. Leave empty to use the two bottles on sandstone." },
+    { "type": "image_picker", "id": "image_mobile", "label": "Phone photo", "info": "Tall photo. Leave empty to use the single bottle on sandstone." },
+    { "type": "text", "id": "alt", "label": "Photo description (for screen readers)", "default": "Two bottles of Liquid Gold on red sandstone with eucalyptus, baby's breath and soft linen" },
+    { "type": "text", "id": "eyebrow", "label": "Small line above", "default": "Liquid Gold · Frankincense face oil" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Deep hydration," },
+    { "type": "text", "id": "heading_accent", "label": "Heading, italic part", "default": "made with intention." },
+    { "type": "textarea", "id": "text", "label": "Text (desktop only)", "default": "Certified organic castor and jojoba, steeped with raw frankincense resin. Two or three drops leave dry skin soft and supple." },
+    { "type": "text", "id": "note", "label": "Note under the button", "default": "1 oz · lasts 6–8 weeks of daily use" }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

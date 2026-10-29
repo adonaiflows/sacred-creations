@@ -1,0 +1,12 @@
+{%- comment -%} Logo mark plus the shop name. Pass light: true on dark backgrounds. {%- endcomment -%}
+<span class="inline-flex items-center gap-3 {% if light %}text-parchment{% else %}text-ink{% endif %}">
+  {%- if light -%}
+    {% render 'logo-mark', class: 'h-9 w-9 text-parchment' %}
+  {%- else -%}
+    {% render 'logo-mark', class: 'h-9 w-9 text-copper' %}
+  {%- endif -%}
+  <span class="flex flex-col leading-none">
+    <span class="font-sans text-[15px] font-medium tracking-[0.32em] uppercase">{{ shop.name }}</span>
+    <span class="mt-1 font-sans text-[9px] tracking-[0.34em] uppercase {% if light %}text-parchment/80{% else %}text-muted{% endif %}">Handmade with intention</span>
+  </span>
+</span>

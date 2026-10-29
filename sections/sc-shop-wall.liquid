@@ -1,0 +1,129 @@
+{%- comment -%}
+  THE SHOP WALL: a limewash wall with two reclaimed-wood shelves. The featured product stands on
+  the top shelf beside a paper price tag. The lower shelf holds blocks: other products as they
+  arrive, or "coming to the shelf" tags.
+{%- endcomment -%}
+{%- liquid
+  assign p = section.settings.product
+  if p == blank
+    capture handle
+      render 'sc-product'
+    endcapture
+    assign handle = handle | strip
+    assign p = all_products[handle]
+  endif
+-%}
+<section id="shop" class="wall relative overflow-hidden" aria-labelledby="shop-title-{{ section.id }}">
+  <div class="mx-auto flex min-h-svh max-w-6xl flex-col justify-center px-4 py-24 sm:px-6" data-walk-in>
+    <div class="mx-auto max-w-xl text-center">
+      {% render 'eyebrow', text: section.settings.eyebrow, color: 'text-ink-soft' %}
+      <h2 id="shop-title-{{ section.id }}" class="font-display text-4xl leading-tight text-ink md:text-5xl">
+        {{ section.settings.heading }} <span class="accent text-copper-deep">{{ section.settings.heading_accent }}</span>
+      </h2>
+      {%- if section.settings.text != blank -%}
+        <p class="mt-4 text-ink-soft md:text-lg">{{ section.settings.text }}</p>
+      {%- endif -%}
+    </div>
+
+    {%- comment -%} Top shelf: the featured product {%- endcomment -%}
+    <div class="relative mx-auto mt-16 w-full max-w-4xl">
+      <div class="relative flex items-end justify-center gap-6 px-4 sm:gap-12">
+        <a href="{{ p.url }}" class="relative z-10 -mb-[4px] block">
+          <span class="sr-only">{{ p.title }}</span>
+          {% render 'sc-image',
+            image: section.settings.bottle_image,
+            asset: 'bottle-front',
+            widths: '450,900',
+            width: 900,
+            height: 2802,
+            alt: section.settings.bottle_alt,
+            sizes: '(min-width: 640px) 170px, 130px',
+            class: 'h-[min(44svh,400px)] w-auto drop-shadow-[0_14px_14px_rgba(50,25,10,0.35)] sm:h-[min(58svh,520px)]'
+          %}
+        </a>
+        <div class="tag relative -mb-[2px] w-[min(44vw,230px)] rotate-[-2deg] rounded-sm p-4 text-ink sm:p-5">
+          <p class="font-display text-xl leading-tight sm:text-2xl">{{ p.title }}</p>
+          {%- if section.settings.kind != blank -%}
+            <p class="mt-1 text-[11px] tracking-[0.18em] text-ink-soft uppercase">{{ section.settings.kind }}</p>
+          {%- endif -%}
+          <p class="mt-3 font-display text-2xl text-copper-deep">{{ p.price | money_without_trailing_zeros }}</p>
+          <a href="{{ p.url }}" class="mt-2 inline-block text-xs tracking-[0.16em] text-ink uppercase underline decoration-copper/50 underline-offset-4 hover:text-copper-deep">
+            See inside
+          </a>
+        </div>
+      </div>
+      <div class="shelf"></div>
+      <div class="mt-24 flex justify-center">
+        {% render 'buy-button', product: p, location: 'shop-shelf' %}
+      </div>
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      {%- comment -%} Lower shelf: more products, or what's coming {%- endcomment -%}
+      <div class="relative mx-auto mt-20 w-full max-w-4xl">
+        <ul class="flex flex-wrap items-end justify-center gap-3 px-4 pb-1 sm:gap-6">
+          {%- for block in section.blocks -%}
+            {%- assign tilt = 'rotate-[1.5deg]' -%}
+            {%- if forloop.index0 == 0 or forloop.index0 == 2 or forloop.index0 == 4 -%}{%- assign tilt = '-rotate-[1.5deg]' -%}{%- endif -%}
+            {%- case block.type -%}
+              {%- when 'product' -%}
+                {%- assign bp = block.settings.product -%}
+                {%- if bp != blank -%}
+                  <li class="flex items-end gap-3" {{ block.shopify_attributes }}>
+                    {%- if bp.featured_image -%}
+                      <a href="{{ bp.url }}" class="block">
+                        {{ bp.featured_image | image_url: width: 400 | image_tag: widths: '200, 400', sizes: '120px', class: 'h-40 w-auto drop-shadow-[0_10px_10px_rgba(50,25,10,0.35)] sm:h-52', loading: 'lazy' }}
+                      </a>
+                    {%- endif -%}
+                    <a href="{{ bp.url }}" class="tag {{ tilt }} block rounded-sm px-4 py-3 text-center">
+                      <span class="block font-display text-lg text-ink">{{ bp.title }}</span>
+                      <span class="block text-[11px] tracking-[0.2em] text-copper-deep uppercase">{{ bp.price | money_without_trailing_zeros }}</span>
+                    </a>
+                  </li>
+                {%- endif -%}
+              {%- else -%}
+                <li class="tag {{ tilt }} rounded-sm px-4 py-3 text-center" {{ block.shopify_attributes }}>
+                  <p class="font-display text-lg text-ink">{{ block.settings.title }}</p>
+                  <p class="text-[10px] tracking-[0.2em] text-ink-soft uppercase">{{ block.settings.note }}</p>
+                </li>
+            {%- endcase -%}
+          {%- endfor -%}
+        </ul>
+        <div class="shelf"></div>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop wall",
+  "tag": "div",
+  "settings": [
+    { "type": "product", "id": "product", "label": "Product on the top shelf", "info": "Leave empty to use the featured product from Theme settings." },
+    { "type": "image_picker", "id": "bottle_image", "label": "Bottle photo", "info": "A cut-out photo with a transparent background, about 900 × 2800 px. Leave empty to use the straight-on Liquid Gold photo." },
+    { "type": "text", "id": "bottle_alt", "label": "Bottle photo description", "default": "Liquid Gold in frosted glass with a bamboo dropper. The label reads Sacred Creations, Liquid Gold, all-natural handcrafted skincare." },
+    { "type": "text", "id": "kind", "label": "Price tag line", "default": "Frankincense face oil · 1 oz" },
+    { "type": "text", "id": "eyebrow", "label": "Small line above", "default": "The shop" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "One oil," },
+    { "type": "text", "id": "heading_accent", "label": "Heading, italic part", "default": "given the whole shelf." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Liquid Gold is our only product, on purpose, so all the focus goes into one oil." }
+  ],
+  "blocks": [
+    {
+      "type": "coming",
+      "name": "Coming soon tag",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Ceramics" },
+        { "type": "text", "id": "note", "label": "Note", "default": "Coming to the shelf" }
+      ]
+    },
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [{ "type": "product", "id": "product", "label": "Product" }]
+    }
+  ],
+  "presets": [{ "name": "Shop wall" }]
+}
+{% endschema %}

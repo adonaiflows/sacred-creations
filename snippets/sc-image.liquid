@@ -1,0 +1,64 @@
+{%- comment -%}
+  An image the merchant picked in the theme editor, or the theme's own photo when none is picked.
+
+  Accepts:
+  - image: an image from an image_picker setting (optional)
+  - asset: base name of the fallback photo in assets, e.g. 'label-closeup' (files are named label-closeup-800.webp)
+  - widths: fallback widths that exist in assets, e.g. '800,1600'
+  - width, height: the fallback photo's full size, for its aspect ratio
+  - alt, sizes, class, style
+  - loading: 'lazy' (default) or 'eager'
+  - priority: true for the first image on the page
+{%- endcomment -%}
+{%- liquid
+  assign loading = loading | default: 'lazy'
+  assign fetch = 'auto'
+  if priority
+    assign loading = 'eager'
+    assign fetch = 'high'
+  endif
+-%}
+{%- if image != blank -%}
+  {%- assign alt_text = alt | default: image.alt -%}
+  {{
+    image
+    | image_url: width: 2400
+    | image_tag:
+      widths: '400, 800, 1200, 1600, 2000, 2400',
+      sizes: sizes,
+      alt: alt_text,
+      class: class,
+      style: style,
+      loading: loading,
+      fetchpriority: fetch
+  }}
+{%- else -%}
+  {%- liquid
+    assign ws = widths | split: ','
+    assign srcset = ''
+    for w in ws
+      assign file = asset | append: '-' | append: w | append: '.webp'
+      assign url = file | asset_url
+      unless forloop.first
+        assign srcset = srcset | append: ', '
+      endunless
+      assign srcset = srcset | append: url | append: ' ' | append: w | append: 'w'
+      if forloop.last
+        assign src = url
+      endif
+    endfor
+  -%}
+  <img
+    src="{{ src }}"
+    srcset="{{ srcset }}"
+    sizes="{{ sizes }}"
+    alt="{{ alt | escape }}"
+    width="{{ width }}"
+    height="{{ height }}"
+    loading="{{ loading }}"
+    fetchpriority="{{ fetch }}"
+    decoding="async"
+    {% if class %}class="{{ class }}"{% endif %}
+    {% if style %}style="{{ style }}"{% endif %}
+  >
+{%- endif -%}

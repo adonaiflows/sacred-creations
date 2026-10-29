@@ -1,0 +1,85 @@
+{%- comment -%}
+  Sticky heading and label close-up beside the numbered ingredients, each with "for the skin" and
+  "the subtle" copy from the store.
+{%- endcomment -%}
+<section id="ingredients" class="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28" aria-labelledby="ingredients-title-{{ section.id }}">
+  <div class="grid gap-12 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
+    <div class="md:sticky md:top-24 md:self-start" data-reveal>
+      {% render 'eyebrow', text: section.settings.eyebrow %}
+      <h2 id="ingredients-title-{{ section.id }}" class="font-display text-4xl leading-tight md:text-5xl">
+        {{ section.settings.heading }} <span class="accent text-copper">{{ section.settings.heading_accent }}</span>
+      </h2>
+      {%- if section.settings.text != blank -%}
+        <p class="mt-4 text-muted md:text-lg">{{ section.settings.text }}</p>
+      {%- endif -%}
+      {%- assign tags = section.settings.tags | split: ',' -%}
+      {%- if tags.size > 0 -%}
+        <ul class="mt-6 flex flex-wrap gap-2 text-xs tracking-[0.16em] text-ink-soft uppercase">
+          {%- for t in tags -%}
+            <li class="rounded-full border border-copper/40 bg-parchment/70 px-3 py-1.5">{{ t | strip }}</li>
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+      <div class="relative mt-10 aspect-[4/5] w-full max-w-[420px] overflow-hidden rounded-t-[999px] rounded-b-[28px] shadow-[0_30px_60px_-35px_rgba(46,30,20,0.5)] ring-1 ring-ink/10">
+        {% render 'sc-image', image: section.settings.image, asset: 'label-closeup', widths: '800,1600', width: 1600, height: 2239, alt: section.settings.image_alt, sizes: '(min-width: 768px) 420px, 92vw', class: 'absolute inset-0 h-full w-full object-cover object-[50%_60%]' %}
+      </div>
+    </div>
+    <ol class="divide-y divide-ink/10 border-y border-ink/10 md:mt-24">
+      {%- for block in section.blocks -%}
+        <li class="grid grid-cols-[auto_1fr] gap-6 py-8" data-reveal {{ block.shopify_attributes }}>
+          <span class="font-display text-2xl text-copper">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+          <div>
+            <h3 class="font-display text-2xl md:text-3xl">{{ block.settings.name }}</h3>
+            <p class="mt-1 text-xs tracking-[0.2em] text-sage uppercase">
+              {{ block.settings.note }}{% if block.settings.note != blank and block.settings.nickname != blank %} · {% endif %}{{ block.settings.nickname }}
+            </p>
+            <dl class="mt-4 space-y-3 leading-relaxed">
+              {%- if block.settings.skin != blank -%}
+                <div>
+                  <dt class="text-[11px] tracking-[0.2em] text-copper uppercase">For the skin</dt>
+                  <dd class="text-muted">{{ block.settings.skin }}</dd>
+                </div>
+              {%- endif -%}
+              {%- if block.settings.subtle != blank -%}
+                <div>
+                  <dt class="text-[11px] tracking-[0.2em] text-copper uppercase">The subtle</dt>
+                  <dd class="text-muted">{{ block.settings.subtle }}</dd>
+                </div>
+              {%- endif -%}
+            </dl>
+          </div>
+        </li>
+      {%- endfor -%}
+    </ol>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ingredients",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small line above", "default": "What's inside" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Three ingredients." },
+    { "type": "text", "id": "heading_accent", "label": "Heading, italic part", "default": "Nothing else." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Certified organic castor and jojoba, raw frankincense resin and its essential oil. Non-comedogenic and hand-crafted in small batches in New Mexico." },
+    { "type": "text", "id": "tags", "label": "Tags (comma separated)", "default": "Non-comedogenic, Certified organic oils, Small batch NM" },
+    { "type": "image_picker", "id": "image", "label": "Photo", "info": "Leave empty to use the label close-up." },
+    { "type": "text", "id": "image_alt", "label": "Photo description", "default": "Close-up of the Liquid Gold label listing cold-pressed castor oil, cold-pressed jojoba oil, raw frankincense resin and frankincense essential oil" }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        { "type": "text", "id": "name", "label": "Name", "default": "Ingredient" },
+        { "type": "text", "id": "note", "label": "Note", "info": "For example Certified organic. Only say organic where it is certified." },
+        { "type": "text", "id": "nickname", "label": "Nickname" },
+        { "type": "textarea", "id": "skin", "label": "For the skin" },
+        { "type": "textarea", "id": "subtle", "label": "The subtle" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Ingredients" }]
+}
+{% endschema %}

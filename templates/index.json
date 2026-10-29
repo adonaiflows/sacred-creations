@@ -1,0 +1,262 @@
+{
+  "sections": {
+    "hero": {
+      "type": "sc-hero",
+      "settings": {}
+    },
+    "ticker": {
+      "type": "sc-ticker",
+      "settings": {},
+      "blocks": {
+        "ticker-1": {
+          "type": "item",
+          "settings": {
+            "text": "Cold-pressed castor"
+          }
+        },
+        "ticker-2": {
+          "type": "item",
+          "settings": {
+            "text": "Certified organic jojoba"
+          }
+        },
+        "ticker-3": {
+          "type": "item",
+          "settings": {
+            "text": "Raw frankincense resin"
+          }
+        },
+        "ticker-4": {
+          "type": "item",
+          "settings": {
+            "text": "Non-comedogenic"
+          }
+        },
+        "ticker-5": {
+          "type": "item",
+          "settings": {
+            "text": "Albuquerque, New Mexico"
+          }
+        },
+        "ticker-6": {
+          "type": "item",
+          "settings": {
+            "text": "21 days on the altar"
+          }
+        },
+        "ticker-7": {
+          "type": "item",
+          "settings": {
+            "text": "Nourishment over noise"
+          }
+        }
+      },
+      "block_order": [
+        "ticker-1",
+        "ticker-2",
+        "ticker-3",
+        "ticker-4",
+        "ticker-5",
+        "ticker-6",
+        "ticker-7"
+      ]
+    },
+    "story": {
+      "type": "sc-story",
+      "settings": {},
+      "blocks": {
+        "story-1": {
+          "type": "stat",
+          "settings": {
+            "number": "3",
+            "label": "ingredients, all named on the label"
+          }
+        },
+        "story-2": {
+          "type": "stat",
+          "settings": {
+            "number": "21+",
+            "label": "days resting on the altar before it ships"
+          }
+        },
+        "story-3": {
+          "type": "stat",
+          "settings": {
+            "number": "2–3",
+            "label": "drops per use, face, hands or body"
+          }
+        },
+        "story-4": {
+          "type": "stat",
+          "settings": {
+            "number": "6–8",
+            "label": "weeks from one 1 oz bottle"
+          }
+        }
+      },
+      "block_order": [
+        "story-1",
+        "story-2",
+        "story-3",
+        "story-4"
+      ]
+    },
+    "shop": {
+      "type": "sc-shop-wall",
+      "settings": {},
+      "blocks": {
+        "shop-1": {
+          "type": "coming",
+          "settings": {
+            "title": "Ceramics",
+            "note": "Coming to the shelf"
+          }
+        },
+        "shop-2": {
+          "type": "coming",
+          "settings": {
+            "title": "Jewelry",
+            "note": "Coming to the shelf"
+          }
+        },
+        "shop-3": {
+          "type": "coming",
+          "settings": {
+            "title": "Clothing",
+            "note": "Coming to the shelf"
+          }
+        },
+        "shop-4": {
+          "type": "coming",
+          "settings": {
+            "title": "Matcha pop-up",
+            "note": "Coming to the shelf"
+          }
+        }
+      },
+      "block_order": [
+        "shop-1",
+        "shop-2",
+        "shop-3",
+        "shop-4"
+      ]
+    },
+    "ingredients": {
+      "type": "sc-ingredients",
+      "settings": {
+        "eyebrow": "Chapter one · What's inside"
+      },
+      "blocks": {
+        "ingredients-1": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Cold-Pressed Castor Oil",
+            "note": "Certified organic",
+            "nickname": "Nature's botox",
+            "skin": "Rich in essential fatty acids, it creates a protective moisture barrier that locks in hydration and guards the skin against environmental stressors.",
+            "subtle": "A deeply grounding anchor that provides a sense of safety and containment, helping you feel “at home” in your skin."
+          }
+        },
+        "ingredients-2": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Cold-Pressed Jojoba Oil",
+            "note": "Certified organic",
+            "nickname": "Mirrors your skin",
+            "skin": "A superior moisturizing agent that mirrors the skin's natural sebum, allowing it to penetrate deeply to hydrate without clogging pores or leaving a greasy residue.",
+            "subtle": "Provides a stable, neutral foundation that allows your natural beauty and the intentional prayers of the elixir to shine through."
+          }
+        },
+        "ingredients-3": {
+          "type": "ingredient",
+          "settings": {
+            "name": "Raw Frankincense Resin & Essential Oil",
+            "note": "Raw resin, steeped by hand",
+            "nickname": "The King of Oils",
+            "skin": "A powerful natural astringent that refines skin texture, tones the skin, and promotes a radiant, even-looking complexion.",
+            "subtle": "Known as the “King of Oils,” it acts as a bridge to the divine, clearing stagnant energy and anchoring the soul in presence."
+          }
+        }
+      },
+      "block_order": [
+        "ingredients-1",
+        "ingredients-2",
+        "ingredients-3"
+      ]
+    },
+    "ritual": {
+      "type": "sc-ritual",
+      "settings": {
+        "eyebrow": "Chapter two · The Sacred Creation Ritual"
+      },
+      "blocks": {
+        "ritual-1": {
+          "type": "step",
+          "settings": {
+            "phase": "Opening",
+            "title": "Cleansed",
+            "body": "Every single bottle is taken through a 3-part smoke process. First it is cleansed with white sage, followed by a blessing with palo santo and/or copal, and finished with the nourishment of sweet grass."
+          }
+        },
+        "ritual-2": {
+          "type": "step",
+          "settings": {
+            "phase": "Creation",
+            "title": "Hand-crafted",
+            "body": "Every ingredient is cared for one-by-one by loving hands. Intentionally alchemized into being: honored, revered, prayed upon."
+          }
+        },
+        "ritual-3": {
+          "type": "step",
+          "settings": {
+            "phase": "Refinement",
+            "title": "Charged",
+            "body": "The finished oil rests on our altar for a minimum of 21 days, continually prayed upon with love: amethyst for protection, rose quartz for self-love, citrine for abundance and tiger's eye for confidence."
+          }
+        }
+      },
+      "block_order": [
+        "ritual-1",
+        "ritual-2",
+        "ritual-3"
+      ]
+    },
+    "moment": {
+      "type": "sc-moment",
+      "settings": {
+        "eyebrow": "Chapter three · Your ritual"
+      }
+    },
+    "stockists": {
+      "type": "sc-stockists",
+      "settings": {},
+      "blocks": {
+        "stockists-1": {
+          "type": "stockist",
+          "settings": {
+            "name": "Daily Rituals / Stickks & Stones",
+            "place": "Albuquerque, New Mexico"
+          }
+        }
+      },
+      "block_order": [
+        "stockists-1"
+      ]
+    },
+    "final": {
+      "type": "sc-final-cta",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "ticker",
+    "story",
+    "shop",
+    "ingredients",
+    "ritual",
+    "moment",
+    "stockists",
+    "final"
+  ]
+}

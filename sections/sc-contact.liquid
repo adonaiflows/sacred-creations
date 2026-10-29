@@ -1,0 +1,85 @@
+{%- comment -%} Contact page: ways to reach us, where to find the oil, and Shopify's contact form. {%- endcomment -%}
+{%- assign footer_email = section.settings.email -%}
+<section class="wall min-h-svh">
+  <div class="mx-auto max-w-5xl px-4 pt-32 pb-24 sm:px-6">
+    {% render 'eyebrow', text: section.settings.eyebrow, color: 'text-copper-deep' %}
+    <h1 class="font-display text-4xl leading-tight md:text-[3.4rem]">
+      {{ section.settings.heading }} <span class="accent text-copper-deep">{{ section.settings.heading_accent }}</span>
+    </h1>
+    <div class="rte mt-5 max-w-lg text-ink-soft md:text-lg">{{ section.settings.text }}</div>
+
+    <div class="mt-14 grid gap-6 md:grid-cols-[1.5fr_1fr_1fr]">
+      {%- for block in section.blocks -%}
+        <div class="tag rounded-sm p-7" {{ block.shopify_attributes }}>
+          <h2 class="text-xs tracking-[0.24em] text-ink-soft uppercase">{{ block.settings.title }}</h2>
+          <div class="rte mt-3 font-display text-xl break-words [&_a]:decoration-copper/50">{{ block.settings.body }}</div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    <div class="paper mt-6 rounded-[28px] p-7 ring-1 ring-ink/10 md:p-10">
+      <h2 class="font-display text-3xl">{{ section.settings.form_heading }}</h2>
+      {%- form 'contact', class: 'mt-6 grid gap-4 md:grid-cols-2' -%}
+        {%- if form.posted_successfully? -%}
+          <p class="rounded-2xl bg-sage/15 p-4 text-ink md:col-span-2" role="status">Thank you. We'll be in touch soon.</p>
+        {%- endif -%}
+        {%- if form.errors -%}
+          <div class="rounded-2xl bg-copper/10 p-4 text-ink md:col-span-2" role="alert">{{ form.errors | default_errors }}</div>
+        {%- endif -%}
+        <label class="block">
+          <span class="text-xs tracking-[0.2em] text-muted uppercase">Name</span>
+          <input type="text" name="contact[name]" autocomplete="name" value="{{ form.name }}" class="mt-2 min-h-12 w-full rounded-full border border-ink/20 bg-parchment px-5">
+        </label>
+        <label class="block">
+          <span class="text-xs tracking-[0.2em] text-muted uppercase">Email (required)</span>
+          <input type="email" name="contact[email]" autocomplete="email" required value="{{ form.email }}" class="mt-2 min-h-12 w-full rounded-full border border-ink/20 bg-parchment px-5">
+        </label>
+        <label class="block md:col-span-2">
+          <span class="text-xs tracking-[0.2em] text-muted uppercase">Message</span>
+          <textarea name="contact[body]" rows="5" class="mt-2 w-full rounded-[24px] border border-ink/20 bg-parchment px-5 py-4">{{ form.body }}</textarea>
+        </label>
+        <div class="md:col-span-2">
+          <button type="submit" class="inline-flex min-h-12 items-center rounded-full bg-copper px-7 py-3.5 text-[15px] font-medium tracking-[0.08em] text-parchment uppercase hover:bg-copper-deep">Send</button>
+        </div>
+      {%- endform -%}
+    </div>
+
+    {%- if section.settings.wholesale_text != blank -%}
+      <div class="paper mt-6 rounded-[28px] p-7 ring-1 ring-ink/10 md:p-10">
+        <h2 class="font-display text-3xl">Wholesale</h2>
+        <div class="rte mt-3 max-w-xl text-ink-soft">{{ section.settings.wholesale_text }}</div>
+        {%- if footer_email != blank -%}
+          <a class="mt-6 inline-flex min-h-12 items-center rounded-full border border-copper px-7 py-3.5 text-[15px] font-medium tracking-[0.08em] text-copper-deep uppercase hover:bg-copper hover:text-parchment" href="mailto:{{ footer_email }}?subject=Wholesale%20enquiry">
+            Email about wholesale
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small line above", "default": "Contact" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Say" },
+    { "type": "text", "id": "heading_accent", "label": "Heading, italic part", "default": "hello." },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Questions about Liquid Gold, an order, or carrying it in your shop? Reach out any way you like.</p>" },
+    { "type": "text", "id": "email", "label": "Email for wholesale", "default": "nmsacredcreations@gmail.com" },
+    { "type": "text", "id": "form_heading", "label": "Form heading", "default": "Send us a note" },
+    { "type": "richtext", "id": "wholesale_text", "label": "Wholesale text", "default": "<p>Would you like Liquid Gold on your shelves? Email us with your shop's name and where you are.</p>" }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Title", "default": "Write to us" },
+        { "type": "richtext", "id": "body", "label": "Text" }
+      ]
+    }
+  ]
+}
+{% endschema %}

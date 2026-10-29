@@ -1,0 +1,13 @@
+{%- comment -%}
+  Prints the handle of the store's featured product: the one picked in Theme settings, or
+  'liquid-gold'. Sections capture it and look the product up with all_products.
+{%- endcomment -%}
+{%- liquid
+  assign handle = 'liquid-gold'
+  if settings.featured_product.handle != blank
+    assign handle = settings.featured_product.handle
+  elsif settings.featured_product != blank
+    assign handle = settings.featured_product
+  endif
+  echo handle
+-%}

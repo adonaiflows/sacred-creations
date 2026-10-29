@@ -1,0 +1,84 @@
+{%- comment -%}
+  Product intro for Liquid Gold: the real bottle turning in a lit alcove on the limewash wall,
+  beside a paper card with the price and buy buttons. Prices and stock come from Shopify.
+{%- endcomment -%}
+{%- liquid
+  assign v = product.selected_or_first_available_variant
+  capture featured_handle
+    render 'sc-product'
+  endcapture
+  assign featured_handle = featured_handle | strip
+  assign turntable = false
+  if section.settings.turntable and product.handle == featured_handle
+    assign turntable = true
+  endif
+-%}
+{{ product | structured_data }}
+<section class="wall relative overflow-hidden" aria-labelledby="product-title-{{ section.id }}">
+  <div class="mx-auto grid min-h-svh max-w-6xl items-center gap-12 px-4 pt-28 pb-20 sm:px-6 md:grid-cols-[1.05fr_0.95fr] md:gap-16" data-walk-in>
+    <div class="niche relative mx-auto aspect-[3/5] w-full max-w-[380px] rounded-t-[999px] rounded-b-md">
+      {%- if turntable -%}
+        {% render 'spin-viewer', class: 'absolute inset-x-[10%] top-[24%] bottom-[4%]' %}
+      {%- elsif product.featured_image -%}
+        {{ product.featured_image | image_url: width: 900 | image_tag: widths: '450, 900', sizes: '300px', class: 'absolute inset-x-[10%] top-[18%] bottom-[6%] m-auto h-[76%] w-auto object-contain', loading: 'eager' }}
+      {%- endif -%}
+    </div>
+    <div class="paper rounded-[28px] p-7 shadow-[0_30px_70px_-30px_rgba(46,30,20,0.6)] ring-1 ring-ink/10 md:p-10">
+      {% render 'eyebrow', text: section.settings.eyebrow %}
+      <h1 id="product-title-{{ section.id }}" class="font-display text-5xl leading-tight md:text-[3.6rem]">{{ product.title }}</h1>
+      <p class="mt-2 font-display text-2xl text-copper-deep">
+        {{ v.price | money_without_trailing_zeros }}
+        {%- if section.settings.size != blank %} <span class="text-base text-muted">· {{ section.settings.size }}</span>{% endif -%}
+      </p>
+      <div class="rte mt-5 max-w-md text-muted md:text-lg">
+        {%- if section.settings.text != blank -%}
+          {{ section.settings.text }}
+        {%- else -%}
+          {{ product.description }}
+        {%- endif -%}
+      </div>
+      {%- if section.blocks.size > 0 -%}
+        <dl class="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-ink/10 bg-ink/10">
+          {%- for block in section.blocks -%}
+            <div class="bg-parchment/90 p-4" {{ block.shopify_attributes }}>
+              <dt class="text-xs tracking-[0.2em] text-muted uppercase">{{ block.settings.label }}</dt>
+              <dd class="mt-1 font-display text-xl">{{ block.settings.value }}</dd>
+            </div>
+          {%- endfor -%}
+        </dl>
+      {%- endif -%}
+      <div id="hero-cta" class="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3">
+        {% render 'buy-button', product: product, location: 'product' %}
+        {%- if v.available -%}
+          {%- form 'product', product, class: 'inline' -%}
+            <input type="hidden" name="id" value="{{ v.id }}">
+            <button type="submit" class="min-h-12 text-sm tracking-[0.16em] text-ink uppercase underline decoration-copper/50 underline-offset-4 hover:text-copper-deep">Add to cart</button>
+          {%- endform -%}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product in the alcove",
+  "tag": "div",
+  "settings": [
+    { "type": "checkbox", "id": "turntable", "label": "Show the Liquid Gold turntable", "default": true, "info": "Shown only on the featured product. Turn off to show the product's main photo instead." },
+    { "type": "text", "id": "eyebrow", "label": "Small line above", "default": "Frankincense face oil" },
+    { "type": "text", "id": "size", "label": "Size", "default": "1 oz" },
+    { "type": "richtext", "id": "text", "label": "Text", "info": "Leave empty to use the product description.", "default": "<p>Deep hydration, made with intention. Certified organic castor and jojoba, steeped with raw frankincense resin and finished with frankincense essential oil. Non-comedogenic.</p>" }
+  ],
+  "blocks": [
+    {
+      "type": "fact",
+      "name": "Fact",
+      "settings": [
+        { "type": "text", "id": "label", "label": "Label", "default": "Lasts" },
+        { "type": "text", "id": "value", "label": "Value", "default": "6–8 weeks daily" }
+      ]
+    }
+  ]
+}
+{% endschema %}

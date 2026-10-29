@@ -1,0 +1,45 @@
+<section class="relative flex min-h-svh items-center overflow-hidden" aria-labelledby="story-title-{{ section.id }}">
+  {% render 'spirograph', class: 'pointer-events-none absolute top-1/2 left-1/2 h-[760px] w-[760px] -translate-x-1/2 -translate-y-1/2 text-copper/15' %}
+  <div class="relative mx-auto max-w-4xl px-4 py-24 text-center sm:px-6" data-reveal>
+    {% render 'logo-mark', class: 'mx-auto mb-10 h-14 w-14 text-copper' %}
+    <h2 id="story-title-{{ section.id }}" class="font-display text-[2rem] leading-snug text-balance md:text-[3.2rem]">
+      {{ section.settings.heading }} <span class="accent text-copper">{{ section.settings.heading_accent }}</span>
+    </h2>
+    {%- if section.settings.text != blank -%}
+      <p class="mx-auto mt-8 max-w-xl text-muted md:text-lg">{{ section.settings.text }}</p>
+    {%- endif -%}
+    {%- if section.blocks.size > 0 -%}
+      <dl class="mx-auto mt-16 grid max-w-3xl grid-cols-2 gap-x-6 gap-y-8 text-left md:grid-cols-4">
+        {%- for block in section.blocks -%}
+          <div class="border-l border-copper/40 pl-4" {{ block.shopify_attributes }}>
+            <dt class="font-display text-4xl text-copper">{{ block.settings.number }}</dt>
+            <dd class="mt-1 text-sm leading-snug text-muted">{{ block.settings.label }}</dd>
+          </div>
+        {%- endfor -%}
+      </dl>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Story",
+  "tag": "div",
+  "settings": [
+    { "type": "textarea", "id": "heading", "label": "Heading", "default": "Liquid Gold is not about excess. It is about refinement." },
+    { "type": "text", "id": "heading_accent", "label": "Heading, italic part", "default": "About nourishment over noise." },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "More than skincare, it is a ritual: a moment of presence, intention and self-honoring woven into the everyday." }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Number",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "21+" },
+        { "type": "text", "id": "label", "label": "Label", "default": "days resting on the altar before it ships" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Story" }]
+}
+{% endschema %}

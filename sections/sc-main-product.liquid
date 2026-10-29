@@ -1,0 +1,53 @@
+{%- comment -%} Standard product page for anything that isn't Liquid Gold (ceramics, jewelry and so on). {%- endcomment -%}
+{%- assign v = product.selected_or_first_available_variant -%}
+{{ product | structured_data }}
+<section class="wall relative overflow-hidden" aria-labelledby="product-title-{{ section.id }}">
+  <div class="mx-auto grid max-w-6xl items-start gap-12 px-4 pt-28 pb-20 sm:px-6 md:grid-cols-2 md:gap-16">
+    <div class="space-y-4">
+      {%- for media in product.media limit: 6 -%}
+        {%- if media.media_type == 'image' -%}
+          <div class="overflow-hidden rounded-[28px] ring-1 ring-ink/10 {% if forloop.first %}{% else %}hidden md:block{% endif %}">
+            {%- if forloop.first -%}
+              {{ media.preview_image | image_url: width: 1600 | image_tag: widths: '600, 900, 1200, 1600', sizes: '(min-width: 768px) 50vw, 92vw', class: 'h-auto w-full', loading: 'eager', fetchpriority: 'high' }}
+            {%- else -%}
+              {{ media.preview_image | image_url: width: 1600 | image_tag: widths: '600, 900, 1200, 1600', sizes: '(min-width: 768px) 50vw, 92vw', class: 'h-auto w-full', loading: 'lazy' }}
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+    <div class="paper rounded-[28px] p-7 shadow-[0_30px_70px_-30px_rgba(46,30,20,0.6)] ring-1 ring-ink/10 md:sticky md:top-24 md:p-10">
+      <h1 id="product-title-{{ section.id }}" class="font-display text-4xl leading-tight md:text-5xl">{{ product.title }}</h1>
+      <p class="mt-2 font-display text-2xl text-copper-deep">
+        {%- if product.price_varies -%}From {{ product.price_min | money_without_trailing_zeros }}{%- else -%}{{ v.price | money_without_trailing_zeros }}{%- endif -%}
+      </p>
+      <div class="rte mt-5 text-muted">{{ product.description }}</div>
+      {%- form 'product', product, id: 'product-form', class: 'mt-8 space-y-4' -%}
+        {%- if product.has_only_default_variant -%}
+          <input type="hidden" name="id" value="{{ v.id }}">
+        {%- else -%}
+          <label class="block text-xs tracking-[0.2em] text-muted uppercase" for="variant-{{ section.id }}">Options</label>
+          <select id="variant-{{ section.id }}" name="id" class="min-h-12 w-full rounded-full border border-ink/20 bg-parchment px-5">
+            {%- for variant in product.variants -%}
+              <option value="{{ variant.id }}" {% if variant == v %}selected{% endif %} {% unless variant.available %}disabled{% endunless %}>
+                {{ variant.title }} · {{ variant.price | money_without_trailing_zeros }}{% unless variant.available %} (sold out){% endunless %}
+              </option>
+            {%- endfor -%}
+          </select>
+        {%- endif -%}
+        <button type="submit" class="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-copper px-7 py-3.5 text-[15px] font-medium tracking-[0.08em] text-parchment uppercase hover:bg-copper-deep disabled:opacity-60" {% unless product.available %}disabled{% endunless %}>
+          {%- if product.available -%}Add to cart{%- else -%}Sold out{%- endif -%}
+        </button>
+        {%- if product.available -%}{{ form | payment_button }}{%- endif -%}
+      {%- endform -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product",
+  "tag": "div",
+  "settings": []
+}
+{% endschema %}

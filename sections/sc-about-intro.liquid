@@ -1,0 +1,30 @@
+<section class="wall relative overflow-hidden" aria-labelledby="about-title-{{ section.id }}">
+  <div class="mx-auto grid min-h-[90svh] max-w-6xl items-center gap-12 px-4 pt-32 pb-20 sm:px-6 md:grid-cols-[1.1fr_0.9fr] md:gap-16">
+    <div data-reveal>
+      {% render 'eyebrow', text: section.settings.eyebrow, color: 'text-copper-deep' %}
+      <h1 id="about-title-{{ section.id }}" class="font-display text-4xl leading-tight text-balance md:text-[3.4rem]">
+        {{ section.settings.heading }} <span class="accent text-copper-deep">{{ section.settings.heading_accent }}</span>
+      </h1>
+      <div class="rte mt-6 max-w-lg text-ink-soft md:text-lg">{{ section.settings.text }}</div>
+    </div>
+    <div class="niche relative mx-auto aspect-[4/5] w-full max-w-[400px] overflow-hidden rounded-t-[999px] rounded-b-md">
+      {% render 'sc-image', image: section.settings.image, asset: 'bottle-hand', widths: '800,1350', width: 1350, height: 2400, alt: section.settings.image_alt, sizes: '(min-width: 768px) 400px, 92vw', priority: true, class: 'absolute inset-0 h-full w-full object-cover' %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About intro",
+  "tag": "div",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Small line above", "default": "About Sacred Creations" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "Intentional, natural," },
+    { "type": "text", "id": "heading_accent", "label": "Heading, italic part", "default": "heart-crafted." },
+    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Sacred Creations is a small brand from New Mexico. Right now it makes one thing, Liquid Gold, on purpose, so all the focus goes into one oil. Liquid Gold is not about excess. It is about refinement. About nourishment over noise.</p>" },
+    { "type": "image_picker", "id": "image", "label": "Photo", "info": "A photo of Kaylee making the oil would fit here. Leave empty to use the bottle in hand." },
+    { "type": "text", "id": "image_alt", "label": "Photo description", "default": "A hand holding a bottle of Liquid Gold" }
+  ],
+  "presets": [{ "name": "About intro" }]
+}
+{% endschema %}

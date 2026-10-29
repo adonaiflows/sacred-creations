@@ -1,0 +1,35 @@
+<section class="wall min-h-svh" aria-labelledby="collection-title">
+  <div class="mx-auto max-w-6xl px-4 pt-32 pb-24 sm:px-6">
+    <h1 id="collection-title" class="text-center font-display text-4xl leading-tight md:text-5xl">{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <div class="rte mx-auto mt-4 max-w-xl text-center text-ink-soft">{{ collection.description }}</div>
+    {%- endif -%}
+    {%- paginate collection.products by 12 -%}
+      {%- assign rows = collection.products | size | plus: 2 | divided_by: 3 -%}
+      <div class="mt-16 space-y-20">
+        {%- for row in (1..rows) -%}
+          {%- assign offset = forloop.index0 | times: 3 -%}
+          <div>
+            <ul class="grid grid-cols-1 gap-10 px-4 sm:grid-cols-3">
+              {%- for card_product in collection.products limit: 3 offset: offset -%}
+                {% render 'product-card', card_product: card_product %}
+              {%- endfor -%}
+            </ul>
+            <div class="shelf mt-2"></div>
+          </div>
+        {%- endfor -%}
+      </div>
+      {%- if paginate.pages > 1 -%}
+        <nav class="mt-16 flex justify-center gap-6 text-sm tracking-[0.16em] uppercase" aria-label="Pages">
+          {%- if paginate.previous -%}<a class="underline underline-offset-4" href="{{ paginate.previous.url }}">Previous</a>{%- endif -%}
+          <span>Page {{ paginate.current_page }} of {{ paginate.pages }}</span>
+          {%- if paginate.next -%}<a class="underline underline-offset-4" href="{{ paginate.next.url }}">Next</a>{%- endif -%}
+        </nav>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{ "name": "Collection", "tag": "div", "settings": [] }
+{% endschema %}

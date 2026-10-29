@@ -1,0 +1,27 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Sacred Creations",
+    "theme_version": "1.0.0",
+    "theme_author": "Adonai",
+    "theme_documentation_url": "https://github.com/adonaiflows/sacred-creations",
+    "theme_support_url": "https://github.com/adonaiflows/sacred-creations"
+  },
+  {
+    "name": "Store",
+    "settings": [
+      {
+        "type": "product",
+        "id": "featured_product",
+        "label": "Featured product",
+        "info": "The product every Buy button sells. Leave empty to use the product with the handle liquid-gold."
+      },
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Browser tab icon",
+        "info": "A square image, at least 64 × 64 px."
+      }
+    ]
+  }
+]

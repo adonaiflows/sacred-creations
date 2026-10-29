@@ -1,0 +1,30 @@
+{%- comment -%} One photo that opens up from a small arch to the full screen height as you scroll. {%- endcomment -%}
+<section aria-label="{{ section.settings.line_1 | escape }}">
+  <div class="relative h-[200svh]" data-grow>
+    <div class="sticky top-0 flex h-svh items-center justify-center overflow-hidden">
+      <div class="relative h-full w-full md:w-[min(100%,56svh)]" data-grow-frame>
+        {% render 'sc-image', image: section.settings.image, asset: 'dropper-cheek-tall', widths: '800,1350', width: 1350, height: 2400, alt: section.settings.image_alt, sizes: '(min-width: 768px) 56vh, 100vw', class: 'absolute inset-0 h-full w-full object-cover object-[50%_45%]' %}
+      </div>
+      <div class="absolute inset-0 flex items-end md:items-center" data-grow-copy>
+        <div class="w-full bg-linear-to-t from-ink/80 to-transparent px-4 pt-24 pb-14 text-parchment sm:px-6 md:mx-auto md:flex md:max-w-6xl md:justify-between md:bg-none md:p-0 md:text-ink">
+          <p class="font-display text-4xl leading-tight md:max-w-[15rem] md:text-5xl">{{ section.settings.line_1 }}</p>
+          <p class="accent text-4xl leading-tight md:max-w-[15rem] md:text-right md:text-5xl md:text-copper">{{ section.settings.line_2 }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Growing photo",
+  "tag": "div",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Tall photo", "info": "Leave empty to use the dropper on a cheek." },
+    { "type": "text", "id": "image_alt", "label": "Photo description", "default": "A glass dropper releasing a drop of Liquid Gold onto a cheek" },
+    { "type": "text", "id": "line_1", "label": "Left words", "default": "Two or three drops." },
+    { "type": "text", "id": "line_2", "label": "Right words (italic)", "default": "Pressed into damp skin." }
+  ],
+  "presets": [{ "name": "Growing photo" }]
+}
+{% endschema %}
