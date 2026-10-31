@@ -34,8 +34,8 @@ export function ShopWall() {
             <Image
               src="/images/bottle-front.webp"
               alt="Liquid Gold in frosted glass with a bamboo dropper. The label reads Sacred Creations, Liquid Gold, all-natural handcrafted skincare, and lists cold-pressed castor oil, cold-pressed jojoba oil, raw frankincense resin and frankincense essential oil."
-              width={450}
-              height={1400}
+              width={900}
+              height={2802}
               sizes="(min-width: 640px) 170px, 130px"
               className="relative h-[min(44svh,400px)] w-auto drop-shadow-[0_14px_14px_rgba(50,25,10,0.35)] sm:h-[min(58svh,520px)]"
             />
