@@ -29,7 +29,7 @@ export function ShopWall() {
 
         {/* Top shelf: Liquid Gold */}
         <div className="relative mx-auto mt-16 w-full max-w-4xl">
-          <div className="relative flex items-end justify-center gap-6 px-4 sm:gap-12">
+          <div className="relative z-10 mb-[9px] flex items-end justify-center gap-6 px-4 sm:gap-12">
             {/* A still, straight-on photo of the real bottle, cut out so it stands on the shelf. */}
             <Image
               src="/images/bottle-front.webp"
@@ -37,9 +37,9 @@ export function ShopWall() {
               width={450}
               height={1400}
               sizes="(min-width: 640px) 170px, 130px"
-              className="relative z-10 -mb-[4px] h-[min(44svh,400px)] w-auto drop-shadow-[0_14px_14px_rgba(50,25,10,0.35)] sm:h-[min(58svh,520px)]"
+              className="relative h-[min(44svh,400px)] w-auto drop-shadow-[0_14px_14px_rgba(50,25,10,0.35)] sm:h-[min(58svh,520px)]"
             />
-            <div className="tag relative -mb-[2px] w-[min(44vw,230px)] rotate-[-2deg] rounded-sm p-4 text-ink sm:p-5">
+            <div className="tag relative w-[min(44vw,230px)] rotate-[-2deg] rounded-sm p-4 text-ink sm:p-5">
               <p className="font-display text-xl leading-tight sm:text-2xl">{liquidGold.name}</p>
               <p className="mt-1 text-[11px] tracking-[0.18em] text-ink-soft uppercase">{liquidGold.kind} · {liquidGold.size}</p>
               <p className="mt-3 font-display text-2xl text-copper-deep">{liquidGold.price}</p>
@@ -56,7 +56,7 @@ export function ShopWall() {
 
         {/* Lower shelf: what's coming */}
         <div className="relative mx-auto mt-20 w-full max-w-4xl">
-          <ul className="flex flex-wrap items-end justify-center gap-3 px-4 pb-1 sm:gap-6">
+          <ul className="relative z-10 mb-[9px] flex flex-wrap items-end justify-center gap-3 px-4 sm:gap-6">
             {comingSoon.map((c, i) => (
               <li key={c} className={`tag rounded-sm px-4 py-3 text-center ${i % 2 ? "rotate-[1.5deg]" : "-rotate-[1.5deg]"}`}>
                 <p className="font-display text-lg text-ink">{c}</p>
