@@ -27,8 +27,8 @@
 
     {%- comment -%} Top shelf: the featured product {%- endcomment -%}
     <div class="relative mx-auto mt-16 w-full max-w-4xl">
-      <div class="relative flex items-end justify-center gap-6 px-4 sm:gap-12">
-        <a href="{{ p.url }}" class="relative z-10 -mb-[4px] block">
+      <div class="relative z-10 mb-[9px] flex items-end justify-center gap-6 px-4 sm:gap-12">
+        <a href="{{ p.url }}" class="relative block">
           <span class="sr-only">{{ p.title }}</span>
           {% render 'sc-image',
             image: section.settings.bottle_image,
@@ -41,7 +41,7 @@
             class: 'h-[min(44svh,400px)] w-auto drop-shadow-[0_14px_14px_rgba(50,25,10,0.35)] sm:h-[min(58svh,520px)]'
           %}
         </a>
-        <div class="tag relative -mb-[2px] w-[min(44vw,230px)] rotate-[-2deg] rounded-sm p-4 text-ink sm:p-5">
+        <div class="tag relative w-[min(44vw,230px)] rotate-[-2deg] rounded-sm p-4 text-ink sm:p-5">
           <p class="font-display text-xl leading-tight sm:text-2xl">{{ p.title }}</p>
           {%- if section.settings.kind != blank -%}
             <p class="mt-1 text-[11px] tracking-[0.18em] text-ink-soft uppercase">{{ section.settings.kind }}</p>
@@ -61,7 +61,7 @@
     {%- if section.blocks.size > 0 -%}
       {%- comment -%} Lower shelf: more products, or what's coming {%- endcomment -%}
       <div class="relative mx-auto mt-20 w-full max-w-4xl">
-        <ul class="flex flex-wrap items-end justify-center gap-3 px-4 pb-1 sm:gap-6">
+        <ul class="relative z-10 mb-[9px] flex flex-wrap items-end justify-center gap-3 px-4 sm:gap-6">
           {%- for block in section.blocks -%}
             {%- assign tilt = 'rotate-[1.5deg]' -%}
             {%- if forloop.index0 == 0 or forloop.index0 == 2 or forloop.index0 == 4 -%}{%- assign tilt = '-rotate-[1.5deg]' -%}{%- endif -%}
