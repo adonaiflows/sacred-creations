@@ -13,7 +13,9 @@
     assign turntable = true
   endif
 -%}
-{{ product | structured_data }}
+<script type="application/ld+json">
+  {{ product | structured_data }}
+</script>
 <section class="wall relative overflow-hidden" aria-labelledby="product-title-{{ section.id }}">
   <div class="mx-auto grid min-h-svh max-w-6xl items-center gap-12 px-4 pt-28 pb-20 sm:px-6 md:grid-cols-[1.05fr_0.95fr] md:gap-16" data-walk-in>
     <div class="niche relative mx-auto aspect-[3/5] w-full max-w-[380px] rounded-t-[999px] rounded-b-md">
