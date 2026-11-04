@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "main": {
+      "type": "sc-customer-login",
+      "settings": {}
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

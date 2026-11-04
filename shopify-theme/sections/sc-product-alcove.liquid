@@ -39,9 +39,10 @@
           {{ product.description }}
         {%- endif -%}
       </div>
-      {%- if section.blocks.size > 0 -%}
+      {%- assign facts = section.blocks | where: 'type', 'fact' -%}
+      {%- if facts.size > 0 -%}
         <dl class="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-ink/10 bg-ink/10">
-          {%- for block in section.blocks -%}
+          {%- for block in facts -%}
             <div class="bg-parchment/90 p-4" {{ block.shopify_attributes }}>
               <dt class="text-xs tracking-[0.2em] text-muted uppercase">{{ block.settings.label }}</dt>
               <dd class="mt-1 font-display text-xl">{{ block.settings.value }}</dd>
@@ -58,6 +59,11 @@
           {%- endform -%}
         {%- endif -%}
       </div>
+      {%- for block in section.blocks -%}
+        {%- if block.type == '@app' -%}
+          <div class="mt-6">{% render block %}</div>
+        {%- endif -%}
+      {%- endfor -%}
     </div>
   </div>
 </section>
@@ -67,19 +73,54 @@
   "name": "Product in the alcove",
   "tag": "div",
   "settings": [
-    { "type": "checkbox", "id": "turntable", "label": "Show the Liquid Gold turntable", "default": true, "info": "Shown only on the featured product. Turn off to show the product's main photo instead." },
-    { "type": "text", "id": "eyebrow", "label": "Small line above", "default": "Frankincense face oil" },
-    { "type": "text", "id": "size", "label": "Size", "default": "1 oz" },
-    { "type": "richtext", "id": "text", "label": "Text", "info": "Leave empty to use the product description.", "default": "<p>Deep hydration, made with intention. Certified organic castor and jojoba, steeped with raw frankincense resin and finished with frankincense essential oil. Non-comedogenic.</p>" }
+    {
+      "type": "checkbox",
+      "id": "turntable",
+      "label": "Show the Liquid Gold turntable",
+      "default": true,
+      "info": "Shown only on the featured product. Turn off to show the product's main photo instead."
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small line above",
+      "default": "Frankincense face oil"
+    },
+    {
+      "type": "text",
+      "id": "size",
+      "label": "Size",
+      "default": "1 oz"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "info": "Leave empty to use the product description.",
+      "default": "<p>Deep hydration, made with intention. Certified organic castor and jojoba, steeped with raw frankincense resin and finished with frankincense essential oil. Non-comedogenic.</p>"
+    }
   ],
   "blocks": [
     {
       "type": "fact",
       "name": "Fact",
       "settings": [
-        { "type": "text", "id": "label", "label": "Label", "default": "Lasts" },
-        { "type": "text", "id": "value", "label": "Value", "default": "6–8 weeks daily" }
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Lasts"
+        },
+        {
+          "type": "text",
+          "id": "value",
+          "label": "Value",
+          "default": "6–8 weeks daily"
+        }
       ]
+    },
+    {
+      "type": "@app"
     }
   ]
 }

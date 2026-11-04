@@ -1,3 +1,4 @@
+{%- if section.settings.only_on_page == blank or page.handle == section.settings.only_on_page -%}
 <section class="paper border-y border-ink/10" aria-labelledby="people-title-{{ section.id }}">
   <div class="mx-auto max-w-6xl px-4 py-20 sm:px-6 md:py-28">
     {% render 'eyebrow', text: section.settings.eyebrow %}
@@ -18,28 +19,71 @@
     </ul>
   </div>
 </section>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "People",
   "tag": "div",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Small line above", "default": "Who we are" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Two people," },
-    { "type": "text", "id": "heading_accent", "label": "Heading, italic part", "default": "one oil." }
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small line above",
+      "default": "Who we are"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Two people,"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading, italic part",
+      "default": "one oil."
+    },
+    {
+      "type": "text",
+      "id": "only_on_page",
+      "label": "Only show on page (handle)",
+      "info": "Used on the default page template, e.g. about or contact. Leave empty to always show."
+    }
   ],
   "blocks": [
     {
       "type": "person",
       "name": "Person",
       "settings": [
-        { "type": "image_picker", "id": "image", "label": "Photo" },
-        { "type": "text", "id": "name", "label": "Name", "default": "Name" },
-        { "type": "text", "id": "role", "label": "Role" },
-        { "type": "richtext", "id": "body", "label": "Text" }
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Photo"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name",
+          "default": "Name"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Role"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Text"
+        }
       ]
     }
   ],
-  "presets": [{ "name": "People" }]
+  "presets": [
+    {
+      "name": "People"
+    }
+  ]
 }
 {% endschema %}

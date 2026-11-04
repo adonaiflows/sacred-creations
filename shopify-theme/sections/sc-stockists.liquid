@@ -1,3 +1,4 @@
+{%- if section.settings.only_on_page == blank or page.handle == section.settings.only_on_page -%}
 <section class="paper border-y border-ink/10" aria-labelledby="stockists-title-{{ section.id }}">
   <div class="mx-auto flex max-w-6xl flex-col items-start gap-6 px-4 py-14 sm:px-6 md:flex-row md:items-center md:justify-between">
     <div>
@@ -16,26 +17,62 @@
     </ul>
   </div>
 </section>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "Stockists",
   "tag": "div",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Small line above", "default": "Find it in person" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "On the shelf in" },
-    { "type": "text", "id": "heading_accent", "label": "Heading, italic part", "default": "Albuquerque." }
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small line above",
+      "default": "Find it in person"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "On the shelf in"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading, italic part",
+      "default": "Albuquerque."
+    },
+    {
+      "type": "text",
+      "id": "only_on_page",
+      "label": "Only show on page (handle)",
+      "info": "Used on the default page template, e.g. about or contact. Leave empty to always show."
+    }
   ],
   "blocks": [
     {
       "type": "stockist",
       "name": "Stockist",
       "settings": [
-        { "type": "text", "id": "name", "label": "Shop name", "default": "Daily Rituals / Stickks & Stones" },
-        { "type": "text", "id": "place", "label": "Town", "default": "Albuquerque, New Mexico" }
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Shop name",
+          "default": "Daily Rituals / Stickks & Stones"
+        },
+        {
+          "type": "text",
+          "id": "place",
+          "label": "Town",
+          "default": "Albuquerque, New Mexico"
+        }
       ]
     }
   ],
-  "presets": [{ "name": "Stockists" }]
+  "presets": [
+    {
+      "name": "Stockists"
+    }
+  ]
 }
 {% endschema %}

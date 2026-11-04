@@ -17,10 +17,12 @@ theme. The look, copy and photos match the demo, and checkout, analytics and edi
   ingredients, ritual and details. It sells whichever product has the handle `liquid-gold`.
   If the handle is different, pick the product under **Customize › Theme settings › Store ›
   Featured product**.
-- **About page:** create a page called About (Online Store › Pages) and set its template to
-  `about`. The template list shows this theme's templates once it is published.
-- **Contact page:** set the existing Contact page's template to `contact`. It uses Shopify's own
-  contact form, so messages go to the store's email.
+- **About and Contact pages:** nothing to assign. Any page with the handle `about` or `contact`
+  gets its design automatically, even on the default page template. The About link only appears
+  in the menu once a page with the handle `about` exists. The contact form is Shopify's own, so
+  messages go to the store's email.
+- **Reviews:** a review app's blocks can be added in Customize, in the Apps section on the
+  product page or inside the product card.
 - **New products later (ceramics, jewelry and so on):** set their template to `standard`. That's
   a plain product page with photos, options and add to cart, without the Liquid Gold content.
 

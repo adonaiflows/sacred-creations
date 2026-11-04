@@ -1,3 +1,4 @@
+{%- if section.settings.only_on_page == blank or page.handle == section.settings.only_on_page -%}
 <section class="wall relative overflow-hidden" aria-labelledby="about-title-{{ section.id }}">
   <div class="mx-auto grid min-h-[90svh] max-w-6xl items-center gap-12 px-4 pt-32 pb-20 sm:px-6 md:grid-cols-[1.1fr_0.9fr] md:gap-16">
     <div data-reveal>
@@ -12,19 +13,60 @@
     </div>
   </div>
 </section>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "About intro",
   "tag": "div",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Small line above", "default": "About Sacred Creations" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Intentional, natural," },
-    { "type": "text", "id": "heading_accent", "label": "Heading, italic part", "default": "heart-crafted." },
-    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Sacred Creations is a small brand from New Mexico. Right now it makes one thing, Liquid Gold, on purpose, so all the focus goes into one oil. Liquid Gold is not about excess. It is about refinement. About nourishment over noise.</p>" },
-    { "type": "image_picker", "id": "image", "label": "Photo", "info": "A photo of Kaylee making the oil would fit here. Leave empty to use the bottle in hand." },
-    { "type": "text", "id": "image_alt", "label": "Photo description", "default": "A hand holding a bottle of Liquid Gold" }
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small line above",
+      "default": "About Sacred Creations"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Intentional, natural,"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading, italic part",
+      "default": "heart-crafted."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Sacred Creations is a small brand from New Mexico. Right now it makes one thing, Liquid Gold, on purpose, so all the focus goes into one oil. Liquid Gold is not about excess. It is about refinement. About nourishment over noise.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Photo",
+      "info": "A photo of Kaylee making the oil would fit here. Leave empty to use the bottle in hand."
+    },
+    {
+      "type": "text",
+      "id": "image_alt",
+      "label": "Photo description",
+      "default": "A hand holding a bottle of Liquid Gold"
+    },
+    {
+      "type": "text",
+      "id": "only_on_page",
+      "label": "Only show on page (handle)",
+      "info": "Used on the default page template, e.g. about or contact. Leave empty to always show."
+    }
   ],
-  "presets": [{ "name": "About intro" }]
+  "presets": [
+    {
+      "name": "About intro"
+    }
+  ]
 }
 {% endschema %}

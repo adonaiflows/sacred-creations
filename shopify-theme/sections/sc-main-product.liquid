@@ -42,6 +42,9 @@
         </button>
         {%- if product.available -%}{{ form | payment_button }}{%- endif -%}
       {%- endform -%}
+      {%- for block in section.blocks -%}
+        <div class="mt-6">{% render block %}</div>
+      {%- endfor -%}
     </div>
   </div>
 </section>
@@ -50,6 +53,11 @@
 {
   "name": "Product",
   "tag": "div",
-  "settings": []
+  "settings": [],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ]
 }
 {% endschema %}

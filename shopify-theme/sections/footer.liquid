@@ -18,8 +18,8 @@
           {%- endfor -%}
         {%- else -%}
           <li><a class="hover:text-parchment" href="{{ routes.all_products_collection_url }}">Shop</a></li>
-          <li><a class="hover:text-parchment" href="/pages/about">About</a></li>
-          <li><a class="hover:text-parchment" href="/pages/contact">Contact</a></li>
+          {%- if pages['about'].id -%}<li><a class="hover:text-parchment" href="{{ pages['about'].url }}">About</a></li>{%- endif -%}
+          {%- if pages['contact'].id -%}<li><a class="hover:text-parchment" href="{{ pages['contact'].url }}">Contact</a></li>{%- endif -%}
           <li><a class="hover:text-parchment" href="{{ routes.cart_url }}">Cart</a></li>
         {%- endif -%}
       </ul>

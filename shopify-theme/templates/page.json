@@ -3,9 +3,144 @@
     "main": {
       "type": "sc-main-page",
       "settings": {}
+    },
+    "about-intro": {
+      "type": "sc-about-intro",
+      "settings": {
+        "only_on_page": "about"
+      }
+    },
+    "about-people": {
+      "type": "sc-people",
+      "settings": {
+        "only_on_page": "about"
+      },
+      "blocks": {
+        "people-1": {
+          "type": "person",
+          "settings": {
+            "name": "Kaylee Romero",
+            "role": "Maker",
+            "body": "<p>Kaylee makes every bottle of Liquid Gold by hand in New Mexico.</p>"
+          }
+        },
+        "people-2": {
+          "type": "person",
+          "settings": {
+            "name": "Adonai",
+            "role": "Business",
+            "body": "<p>Adonai runs the business side of Sacred Creations.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "people-1",
+        "people-2"
+      ]
+    },
+    "about-ritual": {
+      "type": "sc-ritual",
+      "settings": {
+        "only_on_page": "about"
+      },
+      "blocks": {
+        "ritual-1": {
+          "type": "step",
+          "settings": {
+            "phase": "Opening",
+            "title": "Cleansed",
+            "body": "Every single bottle is taken through a 3-part smoke process. First it is cleansed with white sage, followed by a blessing with palo santo and/or copal, and finished with the nourishment of sweet grass."
+          }
+        },
+        "ritual-2": {
+          "type": "step",
+          "settings": {
+            "phase": "Creation",
+            "title": "Hand-crafted",
+            "body": "Every ingredient is cared for one-by-one by loving hands. Intentionally alchemized into being: honored, revered, prayed upon."
+          }
+        },
+        "ritual-3": {
+          "type": "step",
+          "settings": {
+            "phase": "Refinement",
+            "title": "Charged",
+            "body": "The finished oil rests on our altar for a minimum of 21 days, continually prayed upon with love: amethyst for protection, rose quartz for self-love, citrine for abundance and tiger's eye for confidence."
+          }
+        }
+      },
+      "block_order": [
+        "ritual-1",
+        "ritual-2",
+        "ritual-3"
+      ]
+    },
+    "about-next": {
+      "type": "sc-text-buy",
+      "settings": {
+        "only_on_page": "about"
+      }
+    },
+    "about-stockists": {
+      "type": "sc-stockists",
+      "settings": {
+        "only_on_page": "about"
+      },
+      "blocks": {
+        "stockists-1": {
+          "type": "stockist",
+          "settings": {
+            "name": "Daily Rituals / Stickks & Stones",
+            "place": "Albuquerque, New Mexico"
+          }
+        }
+      },
+      "block_order": [
+        "stockists-1"
+      ]
+    },
+    "contact-contact": {
+      "type": "sc-contact",
+      "settings": {
+        "only_on_page": "contact"
+      },
+      "blocks": {
+        "contact-1": {
+          "type": "card",
+          "settings": {
+            "title": "Write to us",
+            "body": "<p><a href=\"mailto:nmsacredcreations@gmail.com\">nmsacredcreations@gmail.com</a></p>"
+          }
+        },
+        "contact-2": {
+          "type": "card",
+          "settings": {
+            "title": "Follow along",
+            "body": "<p><a href=\"https://instagram.com/sacredcreations.shop\">Instagram</a></p><p><a href=\"https://tiktok.com/@sacredcreations.shop\">TikTok</a></p>"
+          }
+        },
+        "contact-3": {
+          "type": "card",
+          "settings": {
+            "title": "Find it in person",
+            "body": "<p>Daily Rituals / Stickks &amp; Stones</p><p>Albuquerque, New Mexico</p>"
+          }
+        }
+      },
+      "block_order": [
+        "contact-1",
+        "contact-2",
+        "contact-3"
+      ]
     }
   },
   "order": [
-    "main"
+    "main",
+    "about-intro",
+    "about-people",
+    "about-ritual",
+    "about-next",
+    "about-stockists",
+    "contact-contact"
   ]
 }
