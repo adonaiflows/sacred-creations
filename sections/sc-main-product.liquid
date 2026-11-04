@@ -1,6 +1,8 @@
 {%- comment -%} Standard product page for anything that isn't Liquid Gold (ceramics, jewelry and so on). {%- endcomment -%}
 {%- assign v = product.selected_or_first_available_variant -%}
-{{ product | structured_data }}
+<script type="application/ld+json">
+  {{ product | structured_data }}
+</script>
 <section class="wall relative overflow-hidden" aria-labelledby="product-title-{{ section.id }}">
   <div class="mx-auto grid max-w-6xl items-start gap-12 px-4 pt-28 pb-20 sm:px-6 md:grid-cols-2 md:gap-16">
     <div class="space-y-4">
