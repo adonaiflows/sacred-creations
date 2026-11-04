@@ -3,9 +3,14 @@
     "main": {
       "type": "sc-main-product",
       "settings": {}
+    },
+    "apps": {
+      "type": "sc-apps",
+      "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "apps"
   ]
 }

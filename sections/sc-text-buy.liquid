@@ -1,3 +1,4 @@
+{%- if section.settings.only_on_page == blank or page.handle == section.settings.only_on_page -%}
 <section class="wall" aria-labelledby="text-buy-title-{{ section.id }}">
   <div class="mx-auto max-w-4xl px-4 py-20 text-center sm:px-6 md:py-28" data-reveal>
     {% render 'eyebrow', text: section.settings.eyebrow, color: 'text-copper-deep' %}
@@ -10,18 +11,54 @@
     {%- endif -%}
   </div>
 </section>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "Text and buy",
   "tag": "div",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Small line above", "default": "What's next" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "More than" },
-    { "type": "text", "id": "heading_accent", "label": "Heading, italic part", "default": "skincare." },
-    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Sacred Creations is growing. Ceramics, jewelry, clothing and a matcha pop-up are on their way.</p>" },
-    { "type": "checkbox", "id": "show_buy", "label": "Show buy button", "default": true }
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small line above",
+      "default": "What's next"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "More than"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading, italic part",
+      "default": "skincare."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Sacred Creations is growing. Ceramics, jewelry, clothing and a matcha pop-up are on their way.</p>"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_buy",
+      "label": "Show buy button",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "only_on_page",
+      "label": "Only show on page (handle)",
+      "info": "Used on the default page template, e.g. about or contact. Leave empty to always show."
+    }
   ],
-  "presets": [{ "name": "Text and buy" }]
+  "presets": [
+    {
+      "name": "Text and buy"
+    }
+  ]
 }
 {% endschema %}

@@ -1,0 +1,60 @@
+<section class="wall min-h-svh">
+  <div class="mx-auto max-w-3xl px-4 pt-32 pb-24 sm:px-6">
+    <h1 class="font-display text-4xl md:text-5xl">Your addresses</h1>
+    <div class="paper mt-8 rounded-[28px] p-7 ring-1 ring-ink/10 md:p-10">
+      {%- paginate customer.addresses by 10 -%}
+        <ul class="space-y-6">
+          {%- for address in customer.addresses -%}
+            <li class="border-b border-ink/10 pb-6">
+              {%- if address == customer.default_address -%}<p class="text-xs tracking-[0.2em] text-copper uppercase">Default</p>{%- endif -%}
+              <div class="text-ink-soft">{{ address | format_address }}</div>
+              <details class="mt-3">
+                <summary class="cursor-pointer text-sm tracking-[0.12em] uppercase">Edit</summary>
+                {%- form 'customer_address', address, class: 'mt-4 grid gap-4' -%}
+                  {%- if form.errors -%}<div class="rounded-2xl bg-copper/10 p-4 text-ink" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
+                  <label class="block text-xs tracking-[0.2em] text-muted uppercase">First name<input type="text" name="address[first_name]" autocomplete="given-name" value="{{ form.first_name }}" class="mt-2 min-h-12 w-full rounded-full border border-ink/20 bg-parchment px-5"></label>
+<label class="block text-xs tracking-[0.2em] text-muted uppercase">Last name<input type="text" name="address[last_name]" autocomplete="family-name" value="{{ form.last_name }}" class="mt-2 min-h-12 w-full rounded-full border border-ink/20 bg-parchment px-5"></label>
+<label class="block text-xs tracking-[0.2em] text-muted uppercase">Address<input type="text" name="address[address1]" autocomplete="address-line1" value="{{ form.address1 }}" class="mt-2 min-h-12 w-full rounded-full border border-ink/20 bg-parchment px-5"></label>
+<label class="block text-xs tracking-[0.2em] text-muted uppercase">Apartment, suite<input type="text" name="address[address2]" autocomplete="address-line2" value="{{ form.address2 }}" class="mt-2 min-h-12 w-full rounded-full border border-ink/20 bg-parchment px-5"></label>
+<label class="block text-xs tracking-[0.2em] text-muted uppercase">City<input type="text" name="address[city]" autocomplete="address-level2" value="{{ form.city }}" class="mt-2 min-h-12 w-full rounded-full border border-ink/20 bg-parchment px-5"></label>
+<label class="block text-xs tracking-[0.2em] text-muted uppercase">State<input type="text" name="address[province]" autocomplete="address-level1" value="{{ form.province }}" class="mt-2 min-h-12 w-full rounded-full border border-ink/20 bg-parchment px-5"></label>
+<label class="block text-xs tracking-[0.2em] text-muted uppercase">ZIP code<input type="text" name="address[zip]" autocomplete="postal-code" value="{{ form.zip }}" class="mt-2 min-h-12 w-full rounded-full border border-ink/20 bg-parchment px-5"></label>
+<label class="block text-xs tracking-[0.2em] text-muted uppercase">Country<input type="text" name="address[country]" autocomplete="country-name" value="{{ form.country }}" class="mt-2 min-h-12 w-full rounded-full border border-ink/20 bg-parchment px-5"></label>
+<label class="block text-xs tracking-[0.2em] text-muted uppercase">Phone<input type="text" name="address[phone]" autocomplete="tel" value="{{ form.phone }}" class="mt-2 min-h-12 w-full rounded-full border border-ink/20 bg-parchment px-5"></label>
+                  <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="address[default]" value="1" {% if address == customer.default_address %}checked{% endif %}> Make this my default address</label>
+                  <button type="submit" class="inline-flex min-h-12 items-center justify-center rounded-full bg-copper px-7 py-3.5 text-[15px] font-medium tracking-[0.08em] text-parchment uppercase hover:bg-copper-deep">Save</button>
+                {%- endform -%}
+              </details>
+              <form method="post" action="{{ routes.account_addresses_url }}/{{ address.id }}" class="mt-3">
+                <input type="hidden" name="_method" value="delete">
+                <button type="submit" class="text-sm tracking-[0.12em] text-ink-soft uppercase underline underline-offset-4 hover:text-copper-deep">Delete</button>
+              </form>
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endpaginate -%}
+      <details class="mt-8" {% if customer.addresses_count == 0 %}open{% endif %}>
+        <summary class="cursor-pointer font-display text-xl">Add a new address</summary>
+        {%- form 'customer_address', customer.new_address, class: 'mt-4 grid gap-4' -%}
+          {%- if form.errors -%}<div class="rounded-2xl bg-copper/10 p-4 text-ink" role="alert">{{ form.errors | default_errors }}</div>{%- endif -%}
+          <label class="block text-xs tracking-[0.2em] text-muted uppercase">First name<input type="text" name="address[first_name]" autocomplete="given-name" value="{{ form.first_name }}" class="mt-2 min-h-12 w-full rounded-full border border-ink/20 bg-parchment px-5"></label>
+<label class="block text-xs tracking-[0.2em] text-muted uppercase">Last name<input type="text" name="address[last_name]" autocomplete="family-name" value="{{ form.last_name }}" class="mt-2 min-h-12 w-full rounded-full border border-ink/20 bg-parchment px-5"></label>
+<label class="block text-xs tracking-[0.2em] text-muted uppercase">Address<input type="text" name="address[address1]" autocomplete="address-line1" value="{{ form.address1 }}" class="mt-2 min-h-12 w-full rounded-full border border-ink/20 bg-parchment px-5"></label>
+<label class="block text-xs tracking-[0.2em] text-muted uppercase">Apartment, suite<input type="text" name="address[address2]" autocomplete="address-line2" value="{{ form.address2 }}" class="mt-2 min-h-12 w-full rounded-full border border-ink/20 bg-parchment px-5"></label>
+<label class="block text-xs tracking-[0.2em] text-muted uppercase">City<input type="text" name="address[city]" autocomplete="address-level2" value="{{ form.city }}" class="mt-2 min-h-12 w-full rounded-full border border-ink/20 bg-parchment px-5"></label>
+<label class="block text-xs tracking-[0.2em] text-muted uppercase">State<input type="text" name="address[province]" autocomplete="address-level1" value="{{ form.province }}" class="mt-2 min-h-12 w-full rounded-full border border-ink/20 bg-parchment px-5"></label>
+<label class="block text-xs tracking-[0.2em] text-muted uppercase">ZIP code<input type="text" name="address[zip]" autocomplete="postal-code" value="{{ form.zip }}" class="mt-2 min-h-12 w-full rounded-full border border-ink/20 bg-parchment px-5"></label>
+<label class="block text-xs tracking-[0.2em] text-muted uppercase">Country<input type="text" name="address[country]" autocomplete="country-name" value="{{ form.country }}" class="mt-2 min-h-12 w-full rounded-full border border-ink/20 bg-parchment px-5"></label>
+<label class="block text-xs tracking-[0.2em] text-muted uppercase">Phone<input type="text" name="address[phone]" autocomplete="tel" value="{{ form.phone }}" class="mt-2 min-h-12 w-full rounded-full border border-ink/20 bg-parchment px-5"></label>
+          <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="address[default]" value="1"> Make this my default address</label>
+          <button type="submit" class="inline-flex min-h-12 items-center justify-center rounded-full bg-copper px-7 py-3.5 text-[15px] font-medium tracking-[0.08em] text-parchment uppercase hover:bg-copper-deep">Add address</button>
+        {%- endform -%}
+      </details>
+      <a href="{{ routes.account_url }}" class="mt-8 inline-block text-sm tracking-[0.12em] uppercase underline underline-offset-4">Back to your account</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{"name": "Account: addresses", "tag": "div", "settings": []}
+{% endschema %}

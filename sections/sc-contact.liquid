@@ -1,3 +1,4 @@
+{%- if section.settings.only_on_page == blank or page.handle == section.settings.only_on_page -%}
 {%- comment -%} Contact page: ways to reach us, where to find the oil, and Shopify's contact form. {%- endcomment -%}
 {%- assign footer_email = section.settings.email -%}
 <section class="wall min-h-svh">
@@ -57,27 +58,78 @@
     {%- endif -%}
   </div>
 </section>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "Contact",
   "tag": "div",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Small line above", "default": "Contact" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Say" },
-    { "type": "text", "id": "heading_accent", "label": "Heading, italic part", "default": "hello." },
-    { "type": "richtext", "id": "text", "label": "Text", "default": "<p>Questions about Liquid Gold, an order, or carrying it in your shop? Reach out any way you like.</p>" },
-    { "type": "text", "id": "email", "label": "Email for wholesale", "default": "nmsacredcreations@gmail.com" },
-    { "type": "text", "id": "form_heading", "label": "Form heading", "default": "Send us a note" },
-    { "type": "richtext", "id": "wholesale_text", "label": "Wholesale text", "default": "<p>Would you like Liquid Gold on your shelves? Email us with your shop's name and where you are.</p>" }
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small line above",
+      "default": "Contact"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Say"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading, italic part",
+      "default": "hello."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Questions about Liquid Gold, an order, or carrying it in your shop? Reach out any way you like.</p>"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email for wholesale",
+      "default": "nmsacredcreations@gmail.com"
+    },
+    {
+      "type": "text",
+      "id": "form_heading",
+      "label": "Form heading",
+      "default": "Send us a note"
+    },
+    {
+      "type": "richtext",
+      "id": "wholesale_text",
+      "label": "Wholesale text",
+      "default": "<p>Would you like Liquid Gold on your shelves? Email us with your shop's name and where you are.</p>"
+    },
+    {
+      "type": "text",
+      "id": "only_on_page",
+      "label": "Only show on page (handle)",
+      "info": "Used on the default page template, e.g. about or contact. Leave empty to always show."
+    }
   ],
   "blocks": [
     {
       "type": "card",
       "name": "Card",
       "settings": [
-        { "type": "text", "id": "title", "label": "Title", "default": "Write to us" },
-        { "type": "richtext", "id": "body", "label": "Text" }
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Write to us"
+        },
+        {
+          "type": "richtext",
+          "id": "body",
+          "label": "Text"
+        }
       ]
     }
   ]

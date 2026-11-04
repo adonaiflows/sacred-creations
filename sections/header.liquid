@@ -13,6 +13,14 @@
   assign handle = handle | strip
   assign featured = all_products[handle]
   assign featured_url = featured.url | default: routes.all_products_collection_url
+  assign about_page = section.settings.about_page
+  if about_page == blank
+    assign about_page = pages['about']
+  endif
+  assign contact_page = section.settings.contact_page
+  if contact_page == blank
+    assign contact_page = pages['contact']
+  endif
 -%}
 {%- capture links -%}
   {%- if section.settings.menu != blank and section.settings.menu.links.size > 0 -%}
@@ -23,8 +31,9 @@
     <a href="{{ routes.root_url }}#shop" class="LINKCLASS">Shop</a>
     <a href="{{ featured_url }}" class="LINKCLASS">{{ featured.title | default: 'Liquid Gold' }}</a>
     <a href="{{ featured_url }}#ritual" class="LINKCLASS">Ritual</a>
-    <a href="{{ section.settings.about_page.url | default: '/pages/about' }}" class="LINKCLASS">About</a>
-    <a href="{{ section.settings.contact_page.url | default: '/pages/contact' }}" class="LINKCLASS">Contact</a>
+    {%- comment -%} Only link pages that exist, so nobody lands on "page not found". {%- endcomment -%}
+    {%- if about_page.id -%}<a href="{{ about_page.url }}" class="LINKCLASS">About</a>{%- endif -%}
+    {%- if contact_page.id -%}<a href="{{ contact_page.url }}" class="LINKCLASS">Contact</a>{%- endif -%}
   {%- endif -%}
 {%- endcapture -%}
 

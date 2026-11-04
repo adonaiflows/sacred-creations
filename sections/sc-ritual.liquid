@@ -1,3 +1,4 @@
+{%- if section.settings.only_on_page == blank or page.handle == section.settings.only_on_page -%}
 {%- comment -%} The Sacred Creation Ritual: Opening, Creation, Refinement as numbered cards. {%- endcomment -%}
 <section id="ritual" class="on-dark relative overflow-hidden bg-ink text-parchment" aria-labelledby="ritual-title-{{ section.id }}">
   {% render 'spirograph', class: 'pointer-events-none absolute -top-40 -right-40 h-[640px] w-[640px] text-sandstone/15' %}
@@ -30,30 +31,85 @@
     {%- endif -%}
   </div>
 </section>
+{%- endif -%}
 
 {% schema %}
 {
   "name": "Ritual",
   "tag": "div",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Small line above", "default": "The Sacred Creation Ritual" },
-    { "type": "text", "id": "heading", "label": "Heading", "default": "Made slowly," },
-    { "type": "text", "id": "heading_accent", "label": "Heading, italic part", "default": "on purpose." },
-    { "type": "textarea", "id": "text", "label": "Text", "default": "Liquid Gold is not simply manufactured skincare. Every bottle is made by hand in New Mexico and taken through the same three steps before it reaches you." },
-    { "type": "textarea", "id": "affirmation", "label": "Affirmation", "default": "I anoint this temple with ancient light. With every drop, I release the old and reveal my true radiance. I am grounded. I am pure. I am golden." },
-    { "type": "text", "id": "caption", "label": "Affirmation caption", "default": "From the Liquid Gold label" }
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Small line above",
+      "default": "The Sacred Creation Ritual"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Made slowly,"
+    },
+    {
+      "type": "text",
+      "id": "heading_accent",
+      "label": "Heading, italic part",
+      "default": "on purpose."
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Liquid Gold is not simply manufactured skincare. Every bottle is made by hand in New Mexico and taken through the same three steps before it reaches you."
+    },
+    {
+      "type": "textarea",
+      "id": "affirmation",
+      "label": "Affirmation",
+      "default": "I anoint this temple with ancient light. With every drop, I release the old and reveal my true radiance. I am grounded. I am pure. I am golden."
+    },
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Affirmation caption",
+      "default": "From the Liquid Gold label"
+    },
+    {
+      "type": "text",
+      "id": "only_on_page",
+      "label": "Only show on page (handle)",
+      "info": "Used on the default page template, e.g. about or contact. Leave empty to always show."
+    }
   ],
   "blocks": [
     {
       "type": "step",
       "name": "Step",
       "settings": [
-        { "type": "text", "id": "phase", "label": "Phase", "default": "Opening" },
-        { "type": "text", "id": "title", "label": "Title", "default": "Cleansed" },
-        { "type": "textarea", "id": "body", "label": "Text" }
+        {
+          "type": "text",
+          "id": "phase",
+          "label": "Phase",
+          "default": "Opening"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Cleansed"
+        },
+        {
+          "type": "textarea",
+          "id": "body",
+          "label": "Text"
+        }
       ]
     }
   ],
-  "presets": [{ "name": "Ritual" }]
+  "presets": [
+    {
+      "name": "Ritual"
+    }
+  ]
 }
 {% endschema %}

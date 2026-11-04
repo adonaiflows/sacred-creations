@@ -1,0 +1,19 @@
+{%- comment -%} A place for app blocks, such as product reviews, added in the theme editor. {%- endcomment -%}
+{%- if section.blocks.size > 0 -%}
+  <div class="paper border-y border-ink/10">
+    <div class="mx-auto max-w-4xl px-4 py-16 sm:px-6">
+      {%- for block in section.blocks -%}
+        {% render block %}
+      {%- endfor -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Apps",
+  "tag": "section",
+  "blocks": [{ "type": "@app" }],
+  "presets": [{ "name": "Apps" }]
+}
+{% endschema %}
