@@ -125,20 +125,12 @@
             "title": "Clothing",
             "note": "Coming to the shelf"
           }
-        },
-        "shop-4": {
-          "type": "coming",
-          "settings": {
-            "title": "Matcha pop-up",
-            "note": "Coming to the shelf"
-          }
         }
       },
       "block_order": [
         "shop-1",
         "shop-2",
-        "shop-3",
-        "shop-4"
+        "shop-3"
       ]
     },
     "ingredients": {
