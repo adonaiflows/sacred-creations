@@ -1,6 +1,8 @@
 {%- comment -%}
-  The one primary call to action. Goes straight to Shopify checkout with one bottle in the cart
-  (a cart permalink), so a visitor can buy from anywhere on the page in one tap.
+  The one primary call to action. A real Shopify product form: it adds one bottle of the product
+  to the cart and goes straight on to checkout, so a visitor can buy from anywhere in one tap.
+  In the theme editor it goes to the cart page instead, because the editor can't open checkout.
+  Without JavaScript it still works, since it is a plain form post to the cart.
 
   Accepts:
   - product: the product to sell (defaults to the featured product)
@@ -36,13 +38,24 @@
   {%- comment -%} No product found: link to the catalog rather than show a broken button. {%- endcomment -%}
   <a href="{{ routes.all_products_collection_url }}" data-cta="{{ location }}" class="{{ base }} {{ look }} {{ class }}">Shop</a>
 {%- elsif v.available -%}
-  <a href="{{ routes.cart_url }}/{{ v.id }}:1" data-cta="{{ location }}" class="{{ base }} {{ look }} {{ class }}">
-    <span>{{ text }}</span>
-    {%- unless show_price == false -%}
-      <span aria-hidden="true" class="h-4 w-px bg-current opacity-40"></span>
-      <span>{{ v.price | money_without_trailing_zeros }}</span>
-    {%- endunless -%}
-  </a>
+  {%- liquid
+    assign next_url = '/checkout'
+    if request.design_mode
+      assign next_url = routes.cart_url
+    endif
+  -%}
+  {%- form 'product', p, class: 'contents' -%}
+    <input type="hidden" name="id" value="{{ v.id }}">
+    <input type="hidden" name="quantity" value="1">
+    <input type="hidden" name="return_to" value="{{ next_url }}">
+    <button type="submit" data-cta="{{ location }}" class="{{ base }} {{ look }} {{ class }} cursor-pointer">
+      <span>{{ text }}</span>
+      {%- unless show_price == false -%}
+        <span aria-hidden="true" class="h-4 w-px bg-current opacity-40"></span>
+        <span>{{ v.price | money_without_trailing_zeros }}</span>
+      {%- endunless -%}
+    </button>
+  {%- endform -%}
 {%- else -%}
   <a href="{{ p.url }}" data-cta="{{ location }}" class="{{ base }} {{ look }} {{ class }} opacity-80">
     <span>Sold out</span>
