@@ -43,7 +43,7 @@ export default function LiquidGoldPage() {
               <dl className="mt-8 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-ink/10 bg-ink/10">
                 {[
                   ["Lasts", "6–8 weeks daily"],
-                  ["Use", "2–3 drops, AM or PM"],
+                  ["Use", "5–7 drops, AM or PM"],
                   ["Skin feel", "Non-comedogenic"],
                   ["Ships", "US, via USPS"],
                 ].map(([k, v]) => (

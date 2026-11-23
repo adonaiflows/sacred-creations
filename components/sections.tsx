@@ -166,7 +166,7 @@ export function DropSection() {
     <section aria-label="How it goes on">
       <GrowPhoto src="/images/dropper-cheek-tall.jpg" alt="A glass dropper releasing a drop of Liquid Gold onto a cheek" objectPosition="50% 45%">
         <div className="w-full bg-linear-to-t from-ink/80 to-transparent px-4 pt-24 pb-14 text-parchment sm:px-6 md:mx-auto md:flex md:max-w-6xl md:justify-between md:bg-none md:p-0 md:text-ink">
-          <p className="font-display text-4xl leading-tight md:max-w-[15rem] md:text-5xl">Two or three drops.</p>
+          <p className="font-display text-4xl leading-tight md:max-w-[15rem] md:text-5xl">Five to seven drops.</p>
           <p className="accent text-4xl leading-tight md:max-w-[15rem] md:text-right md:text-5xl md:text-copper">Pressed into damp skin.</p>
         </div>
       </GrowPhoto>
@@ -194,7 +194,7 @@ export function MomentSection({ chapter }: { chapter?: string }) {
           Give your skin a moment <span className="accent text-copper">that&apos;s just for you.</span>
         </h2>
         <p className="mt-6 max-w-md text-muted md:text-lg">
-          Apply 2–3 drops to clean, slightly damp skin, morning or night. A little goes a long way: one {liquidGold.size} bottle typically lasts {liquidGold.lasts}.
+          Apply 5–7 drops to clean, slightly damp skin, morning or night. A little goes a long way: one {liquidGold.size} bottle typically lasts {liquidGold.lasts}.
         </p>
         <BuyButton location="mid" className="mt-10 self-start" />
       </div>
@@ -225,7 +225,7 @@ export function DetailsSection() {
           <DetailTabs
             tabs={[
               { label: "Ingredients", content: row("Three ingredients, nothing else.", "What exactly is in it?", "Will an oil clog my pores?") },
-              { label: "How to use", content: row("2–3 drops, morning or night.", "How do I use it?", "How long does one bottle last?") },
+              { label: "How to use", content: row("5–7 drops, morning or night.", "How do I use it?", "How long does one bottle last?") },
               { label: "Shipping", content: row("Shipped within the US by USPS.", "When will it ship?", "What if it isn't right for me?") },
               { label: "Sensitive skin", content: row("Patch test first.", "Is it okay for sensitive skin?") },
             ]}

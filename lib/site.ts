@@ -111,7 +111,7 @@ export const standard = ritual;
 export const faqs = [
   {
     q: "How do I use it?",
-    a: "Apply 2–3 drops to clean, slightly damp skin (face, hands or body), morning or night.",
+    a: "Apply 5–7 drops to clean, slightly damp skin (face, hands or body), morning or night.",
   },
   {
     q: "How long does one bottle last?",
