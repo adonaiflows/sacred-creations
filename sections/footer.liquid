@@ -60,6 +60,15 @@
   </div>
   <div class="mx-auto flex max-w-6xl flex-col gap-3 border-t border-parchment/10 px-4 pt-6 pb-28 text-xs text-parchment/60 sm:px-6 md:flex-row md:justify-between md:pb-10">
     <p>{{ section.settings.disclaimer }}</p>
+    {%- if shop.policies.size > 0 -%}
+      <nav aria-label="Policies">
+        <ul class="flex flex-wrap gap-x-5 gap-y-2">
+          {%- for policy in shop.policies -%}
+            <li><a class="underline-offset-4 hover:text-parchment hover:underline" href="{{ policy.url }}">{{ policy.title }}</a></li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    {%- endif -%}
     <p>&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}</p>
   </div>
 </footer>
