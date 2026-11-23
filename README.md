@@ -13,7 +13,7 @@ theme. The look, copy and photos match the demo, and checkout, analytics and edi
 
 ## One-time setup
 
-- **Buy buttons:** every Buy button is a Shopify product form. It puts one bottle in the cart and goes straight to checkout (in the theme editor it opens the cart page instead, because the editor can't open checkout). Test it with the eye-icon Preview, not inside Customize.
+- **Shopping flow:** Shop in the menu and every Buy button open the Liquid Gold product page. There the button reads Add to cart and opens the cart page; checkout is only reached from the cart's Check out button. The header shows Home, Shop, About, Contact and a cart icon with the item count.
 - **Liquid Gold:** the default product template is the Liquid Gold layout, with the turntable,
   ingredients, ritual and details. It sells whichever product has the handle `liquid-gold`.
   If the handle is different, pick the product under **Customize › Theme settings › Store ›

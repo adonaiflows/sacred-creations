@@ -17,7 +17,15 @@
             <li><a class="hover:text-parchment" href="{{ link.url }}">{{ link.title }}</a></li>
           {%- endfor -%}
         {%- else -%}
-          <li><a class="hover:text-parchment" href="{{ routes.all_products_collection_url }}">Shop</a></li>
+          {%- liquid
+            capture handle
+              render 'sc-product'
+            endcapture
+            assign handle = handle | strip
+            assign shop_url = all_products[handle].url | default: routes.all_products_collection_url
+          -%}
+          <li><a class="hover:text-parchment" href="{{ routes.root_url }}">Home</a></li>
+          <li><a class="hover:text-parchment" href="{{ shop_url }}">Shop</a></li>
           {%- if pages['about'].id -%}<li><a class="hover:text-parchment" href="{{ pages['about'].url }}">About</a></li>{%- endif -%}
           {%- if pages['contact'].id -%}<li><a class="hover:text-parchment" href="{{ pages['contact'].url }}">Contact</a></li>{%- endif -%}
           <li><a class="hover:text-parchment" href="{{ routes.cart_url }}">Cart</a></li>
