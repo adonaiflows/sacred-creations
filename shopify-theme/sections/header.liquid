@@ -28,13 +28,21 @@
       <a href="{{ link.url }}" class="LINKCLASS"{% if link.current %} aria-current="page"{% endif %}>{{ link.title }}</a>
     {%- endfor -%}
   {%- else -%}
-    <a href="{{ routes.root_url }}#shop" class="LINKCLASS">Shop</a>
-    <a href="{{ featured_url }}" class="LINKCLASS">{{ featured.title | default: 'Liquid Gold' }}</a>
-    <a href="{{ featured_url }}#ritual" class="LINKCLASS">Ritual</a>
+    <a href="{{ routes.root_url }}" class="LINKCLASS"{% if template.name == 'index' %} aria-current="page"{% endif %}>Home</a>
+    <a href="{{ featured_url }}" class="LINKCLASS"{% if template.name == 'product' %} aria-current="page"{% endif %}>Shop</a>
     {%- comment -%} Only link pages that exist, so nobody lands on "page not found". {%- endcomment -%}
     {%- if about_page.id -%}<a href="{{ about_page.url }}" class="LINKCLASS">About</a>{%- endif -%}
     {%- if contact_page.id -%}<a href="{{ contact_page.url }}" class="LINKCLASS">Contact</a>{%- endif -%}
   {%- endif -%}
+{%- endcapture -%}
+
+{%- capture cart_link -%}
+  <a href="{{ routes.cart_url }}" class="CARTCLASS relative inline-flex size-11 items-center justify-center rounded-full" aria-label="Cart{% if cart.item_count > 0 %}, {{ cart.item_count }} {{ cart.item_count | pluralize: 'item', 'items' }}{% endif %}">
+    <svg aria-hidden="true" viewBox="0 0 24 24" class="size-[22px]" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2.2l2.1 10.4a1.6 1.6 0 0 0 1.6 1.3h8.3a1.6 1.6 0 0 0 1.6-1.2L20.5 8H6.1"/><circle cx="9.5" cy="19.5" r="1.3"/><circle cx="17" cy="19.5" r="1.3"/></svg>
+    {%- if cart.item_count > 0 -%}
+      <span aria-hidden="true" class="absolute top-0.5 right-0.5 flex min-w-[18px] items-center justify-center rounded-full bg-copper px-1 text-[10px] leading-[18px] font-medium text-parchment">{{ cart.item_count }}</span>
+    {%- endif -%}
+  </a>
 {%- endcapture -%}
 
 <header class="absolute inset-x-0 top-0 z-30">
@@ -44,18 +52,24 @@
     </a>
     <nav aria-label="Main" class="hidden items-center gap-7 rounded-full bg-parchment/85 py-1.5 pr-1.5 pl-7 text-[13px] tracking-[0.12em] text-muted uppercase shadow-[0_8px_30px_-12px_rgba(46,30,20,0.35)] backdrop-blur lg:flex">
       {{ links | replace: 'LINKCLASS', 'hover:text-ink' }}
-      <a href="{{ routes.cart_url }}" class="hover:text-ink">Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</a>
+      {{ cart_link | replace: 'CARTCLASS', 'text-ink hover:text-copper-deep' }}
       {% render 'buy-button', location: 'header', label: 'Buy', class: 'min-h-10 px-5 py-2 text-xs' %}
     </nav>
-    <details class="group relative lg:hidden">
+    <div class="flex items-center gap-2 lg:hidden">
+    {%- if light -%}
+      {{ cart_link | replace: 'CARTCLASS', 'bg-parchment/20 text-parchment backdrop-blur' }}
+    {%- else -%}
+      {{ cart_link | replace: 'CARTCLASS', 'bg-ink/5 text-ink' }}
+    {%- endif -%}
+    <details class="group relative">
       <summary class="flex min-h-11 cursor-pointer list-none items-center gap-2 rounded-full px-4 text-xs tracking-[0.2em] uppercase [&::-webkit-details-marker]:hidden {% if light %}bg-parchment/20 text-parchment backdrop-blur{% else %}bg-ink/5 text-ink{% endif %}">
         Menu
       </summary>
       <nav aria-label="Main" class="absolute right-0 mt-2 flex w-56 flex-col rounded-2xl bg-parchment p-2 text-sm tracking-[0.12em] text-ink uppercase shadow-[0_20px_40px_-20px_rgba(46,30,20,0.5)] ring-1 ring-ink/10">
         {{ links | replace: 'LINKCLASS', 'rounded-xl px-4 py-3 hover:bg-parchment-deep' }}
-        <a href="{{ routes.cart_url }}" class="rounded-xl px-4 py-3 hover:bg-parchment-deep">Cart{% if cart.item_count > 0 %} ({{ cart.item_count }}){% endif %}</a>
       </nav>
     </details>
+    </div>
   </div>
 </header>
 
@@ -64,7 +78,7 @@
   "name": "Header",
   "class": "sc-header",
   "settings": [
-    { "type": "link_list", "id": "menu", "label": "Menu", "info": "Leave empty to use the built-in links: Shop, Liquid Gold, Ritual, About, Contact." },
+    { "type": "link_list", "id": "menu", "label": "Menu", "info": "Leave empty to use the built-in links: Home, Shop, About, Contact." },
     { "type": "page", "id": "about_page", "label": "About page" },
     { "type": "page", "id": "contact_page", "label": "Contact page" }
   ]
