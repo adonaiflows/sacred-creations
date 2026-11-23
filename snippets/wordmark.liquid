@@ -1,12 +1,16 @@
-{%- comment -%} Logo mark plus the shop name. Pass light: true on dark backgrounds. {%- endcomment -%}
-<span class="inline-flex items-center gap-3 {% if light %}text-parchment{% else %}text-ink{% endif %}">
-  {%- if light -%}
-    {% render 'logo-mark', class: 'h-9 w-9 text-parchment' %}
-  {%- else -%}
-    {% render 'logo-mark', class: 'h-9 w-9 text-copper' %}
-  {%- endif -%}
-  <span class="flex flex-col leading-none">
-    <span class="font-sans text-[15px] font-medium tracking-[0.32em] uppercase">{{ shop.name }}</span>
-    <span class="mt-1 font-sans text-[9px] tracking-[0.34em] uppercase {% if light %}text-parchment/80{% else %}text-muted{% endif %}">Handmade with intention</span>
-  </span>
-</span>
+{%- comment -%}
+  The Sacred Creations logo (seed of life with "Sacred Creations · Handmade with intention").
+  Pass light: true on dark backgrounds (white lettering); otherwise the lettering is dark ink.
+  Optional class sets the size (default: header size).
+{%- endcomment -%}
+{%- liquid
+  assign file = 'sc-logo-dark.webp'
+  if light
+    assign file = 'sc-logo-light.webp'
+  endif
+  assign size = class | default: 'h-[68px] w-auto sm:h-24'
+  if light and class == blank
+    assign size = size | append: ' drop-shadow-[0_1px_10px_rgba(0,0,0,0.5)]'
+  endif
+-%}
+<img src="{{ file | asset_url }}" alt="{{ shop.name }}, handmade with intention" width="771" height="456" class="{{ size }}" fetchpriority="high">

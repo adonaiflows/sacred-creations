@@ -1,10 +1,7 @@
 <footer class="on-dark bg-ink text-parchment/70">
   <div class="mx-auto grid max-w-6xl gap-10 px-4 pt-14 pb-8 text-sm sm:px-6 md:grid-cols-[1.3fr_1fr_1fr_1fr]">
     <div>
-      <div class="flex items-center gap-3">
-        {% render 'logo-mark', class: 'h-9 w-9 text-sandstone' %}
-        <p class="tracking-[0.32em] text-parchment uppercase">{{ shop.name }}</p>
-      </div>
+      {% render 'wordmark', light: true, class: 'h-28 w-auto -ml-3' %}
       {%- if section.settings.blurb != blank -%}
         <p class="mt-4 max-w-xs leading-relaxed">{{ section.settings.blurb }}</p>
       {%- endif -%}
