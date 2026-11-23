@@ -9,7 +9,11 @@
       <div class="rte mt-6 max-w-lg text-ink-soft md:text-lg">{{ section.settings.text }}</div>
     </div>
     <div class="niche relative mx-auto aspect-[4/5] w-full max-w-[400px] overflow-hidden rounded-t-[999px] rounded-b-md">
+      {%- if section.settings.built_in == 'founders' -%}
+        {% render 'sc-image', image: section.settings.image, asset: 'founders', widths: '800,1200', width: 1200, height: 1578, alt: section.settings.image_alt, sizes: '(min-width: 768px) 400px, 92vw', priority: true, class: 'absolute inset-0 h-full w-full object-cover object-[50%_35%]' %}
+      {%- else -%}
       {% render 'sc-image', image: section.settings.image, asset: 'bottle-hand', widths: '800,1350', width: 1350, height: 2400, alt: section.settings.image_alt, sizes: '(min-width: 768px) 400px, 92vw', priority: true, class: 'absolute inset-0 h-full w-full object-cover' %}
+      {%- endif -%}
     </div>
   </div>
 </section>
@@ -48,7 +52,17 @@
       "type": "image_picker",
       "id": "image",
       "label": "Photo",
-      "info": "A photo of Kaylee making the oil would fit here. Leave empty to use the bottle in hand."
+      "info": "Leave empty to use the built-in photo below."
+    },
+    {
+      "type": "select",
+      "id": "built_in",
+      "label": "Built-in photo",
+      "default": "bottle",
+      "options": [
+        { "value": "bottle", "label": "Bottle in hand" },
+        { "value": "founders", "label": "Adonai and Kaylee" }
+      ]
     },
     {
       "type": "text",
