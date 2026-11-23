@@ -2,26 +2,58 @@
   "sections": {
     "intro": {
       "type": "sc-about-intro",
-      "settings": {}
+      "settings": {
+        "eyebrow": "About Sacred Creations",
+        "heading": "Modern alchemy.",
+        "heading_accent": "Ancient wisdom.",
+        "text": "<p>Sacred Creations is a family brand from Albuquerque, New Mexico, founded by husband and wife Adonai and Kaylee Romero. We make natural, intentional products from ingredients of the earth, starting with Liquid Gold: three clean ingredients, crafted by hand with prayer and intention.</p>",
+        "image_alt": "Adonai and Kaylee Romero with their child, smiling outdoors",
+        "built_in": "founders"
+      }
+    },
+    "story": {
+      "type": "sc-about-story",
+      "settings": {
+        "surface": "paper",
+        "eyebrow": "How it began",
+        "heading": "It began",
+        "heading_accent": "with our family.",
+        "text": "<p>Sacred Creations began when Kaylee was pregnant. Preparing to raise our family in a state of well-being, we looked closely at everything around us: our clothes, dishes, cookware, cleaners, body products and furniture. We stopped settling for blends and ingredients we couldn't name, and moved beyond organic toward truly natural living, made from the earth and free of petroleum and toxins.</p><p>We soon saw we weren't the only ones who cared, yet it was so hard to find products that support health instead of harming it. Skincare was the clearest gap. We couldn't find a single face moisturizer that wasn't built on petroleum or fragrance hidden behind lab-made names we couldn't pronounce. Change had to begin with us. So Liquid Gold was born.</p>",
+        "quote": "We believe every action in life is sacred, and our goal is to share intentional living with everyone."
+      }
+    },
+    "name": {
+      "type": "sc-about-story",
+      "settings": {
+        "surface": "wall",
+        "eyebrow": "Why “sacred”",
+        "heading": "Intention",
+        "heading_accent": "is sacred.",
+        "text": "<p>The name is a nod to our Creator, who we see in every part of this human experience: in a ceramic mug, the wall of our home, the plant on the windowsill. We hope our products bring that same awareness quietly into your days.</p><p>Everything we make is created with prayer and intention for the person who will use it. We charge each bottle with tools we truly believe spread love and help create a better world.</p>"
+      }
     },
     "people": {
       "type": "sc-people",
-      "settings": {},
+      "settings": {
+        "eyebrow": "Who we are",
+        "heading": "Two founders,",
+        "heading_accent": "one vision."
+      },
       "blocks": {
         "people-1": {
           "type": "person",
           "settings": {
             "name": "Kaylee Romero",
-            "role": "Maker",
-            "body": "<p>Kaylee makes every bottle of Liquid Gold by hand in New Mexico.</p>"
+            "role": "Co-founder · Formulator & artist",
+            "body": "<p>Kaylee is the creator and the artist, the sacred feminine of Sacred Creations. She receives the visions, formulates the skincare, makes the ceramics and hand-crafts every bottle of Liquid Gold.</p>"
           }
         },
         "people-2": {
           "type": "person",
           "settings": {
-            "name": "Adonai",
-            "role": "Business",
-            "body": "<p>Adonai runs the business side of Sacred Creations.</p>"
+            "name": "Adonai Romero",
+            "role": "Co-founder · Business & design",
+            "body": "<p>Adonai is the structure, the sacred masculine. He builds the avenues that carry Kaylee's art into the world: the website, the business, the paperwork and the day-to-day. A designer too, he shapes the look of Sacred Creations and will lead its clothing line.</p>"
           }
         }
       },
@@ -30,16 +62,28 @@
         "people-2"
       ]
     },
+    "trinity": {
+      "type": "sc-about-story",
+      "settings": {
+        "surface": "wall",
+        "eyebrow": "Liquid Gold",
+        "heading": "A holy",
+        "heading_accent": "trinity.",
+        "text": "<p>Castor, jojoba and frankincense. Each one supports the others, and you. In spirituality, medicine and nature, things that come in threes have long been known to be powerful, and these three are no exception.</p><p>The oil rests on our altar for at least 21 days. That time lets the raw frankincense resin infuse into the oils, adding its own character alongside the essential oil and giving Liquid Gold its golden sheen.</p>"
+      }
+    },
     "ritual": {
       "type": "sc-ritual",
-      "settings": {},
+      "settings": {
+        "text": "Cleansing lets us begin in a clear state. As we craft, each ingredient is poured with its own intention for you to receive: beauty, abundance, clarity and protection. Then it rests and is charged on the altar."
+      },
       "blocks": {
         "ritual-1": {
           "type": "step",
           "settings": {
             "phase": "Opening",
             "title": "Cleansed",
-            "body": "Every single bottle is taken through a 3-part smoke process. First it is cleansed with white sage, followed by a blessing with palo santo and/or copal, and finished with the nourishment of sweet grass."
+            "body": "Every bottle is taken through a 3-part smoke process: cleansed with white sage, blessed with palo santo and/or copal, and finished with the nourishment of sweet grass."
           }
         },
         "ritual-2": {
@@ -47,7 +91,7 @@
           "settings": {
             "phase": "Creation",
             "title": "Hand-crafted",
-            "body": "Every ingredient is cared for one-by-one by loving hands. Intentionally alchemized into being: honored, revered, prayed upon."
+            "body": "Every ingredient is poured by hand with its own intention for you: beauty, abundance, clarity and protection. Honored, revered, prayed upon."
           }
         },
         "ritual-3": {
@@ -65,9 +109,70 @@
         "ritual-3"
       ]
     },
+    "promise": {
+      "type": "sc-about-story",
+      "settings": {
+        "surface": "wall",
+        "eyebrow": "Our promise",
+        "heading": "What we will",
+        "heading_accent": "never compromise.",
+        "text": "<p>We believe a more beautiful world is possible, and that it begins with the products we make and the businesses behind them. When you use Liquid Gold, we pray you feel nourished, clean, abundant and beautiful: safe in your body, confident in your choices, and clear about what goes onto your skin and why.</p>"
+      },
+      "blocks": {
+        "p1": {
+          "type": "point",
+          "settings": {
+            "title": "Ingredients",
+            "text": "Only what comes from the earth. Nothing we can't name, nothing we wouldn't use on our own family."
+          }
+        },
+        "p2": {
+          "type": "point",
+          "settings": {
+            "title": "Pachamama",
+            "text": "No plastic, no chemicals, no toxins. We do no harm to the land that gives us everything."
+          }
+        },
+        "p3": {
+          "type": "point",
+          "settings": {
+            "title": "Presentation",
+            "text": "Every bottle is made and finished with care, because how something arrives is part of the ritual."
+          }
+        },
+        "p4": {
+          "type": "point",
+          "settings": {
+            "title": "Ethics",
+            "text": "We never take “the cheaper route”. Every choice is made with integrity."
+          }
+        }
+      },
+      "block_order": [
+        "p1",
+        "p2",
+        "p3",
+        "p4"
+      ]
+    },
+    "home": {
+      "type": "sc-about-story",
+      "settings": {
+        "surface": "paper",
+        "eyebrow": "Rooted in Albuquerque",
+        "heading": "Made in",
+        "heading_accent": "New Mexico.",
+        "text": "<p>The land here shapes our designs, our colors and our connection to the earth. The culture of natural living and art fuels our souls.</p><p>We also know our community doesn't have the access to clean products that cities like LA, San Francisco or New York do. Sacred Creations is here to help change that, for our families and yours.</p><p>Before Sacred Creations, we were sound healers. Through those offerings we met so many people facing the same problem: not knowing what everyday products were doing to them, or not knowing where to find something better. We committed to changing that through our devotion to spreading wellness and awareness.</p>"
+      }
+    },
     "next": {
       "type": "sc-text-buy",
-      "settings": {}
+      "settings": {
+        "eyebrow": "What's next",
+        "heading": "A space for awareness,",
+        "heading_accent": "accessibility and expression.",
+        "text": "<p>Liquid Gold is just the beginning. Skin, body and hair care are on their way, along with a clothing line and, in time, Kaylee's ceramics.</p>"
+      }
     },
     "stockists": {
       "type": "sc-stockists",
@@ -88,8 +193,13 @@
   },
   "order": [
     "intro",
+    "story",
+    "name",
     "people",
+    "trinity",
     "ritual",
+    "promise",
+    "home",
     "next",
     "stockists"
   ]

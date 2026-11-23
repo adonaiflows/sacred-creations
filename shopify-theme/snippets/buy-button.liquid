@@ -1,12 +1,14 @@
 {%- comment -%}
-  The one primary call to action. Goes straight to Shopify checkout with one bottle in the cart
-  (a cart permalink), so a visitor can buy from anywhere on the page in one tap.
+  The one primary call to action. Everywhere except the product page it links to the product page.
+  On the product page it is a real Shopify product form ("Add to cart") that adds one bottle and
+  opens the cart page. It never skips the cart: checkout is only reached from the cart.
 
   Accepts:
   - product: the product to sell (defaults to the featured product)
   - location: where the button sits, kept in data-cta for analytics
   - style: 'copper' (default) or 'light' for dark backgrounds
-  - label: button text (default "Buy <product title>")
+  - label: link text off the product page (default "Buy <product title>")
+  - cart_label: button text on the product page (default "Add to cart")
   - class: extra classes
   - show_price: false to hide the price (default true)
 {%- endcomment -%}
@@ -35,14 +37,26 @@
 {%- if p.id == blank -%}
   {%- comment -%} No product found: link to the catalog rather than show a broken button. {%- endcomment -%}
   <a href="{{ routes.all_products_collection_url }}" data-cta="{{ location }}" class="{{ base }} {{ look }} {{ class }}">Shop</a>
-{%- elsif v.available -%}
-  <a href="{{ routes.cart_url }}/{{ v.id }}:1" data-cta="{{ location }}" class="{{ base }} {{ look }} {{ class }}">
+{%- elsif template.name != 'product' -%}
+  <a href="{{ p.url }}" data-cta="{{ location }}" class="{{ base }} {{ look }} {{ class }}">
     <span>{{ text }}</span>
     {%- unless show_price == false -%}
       <span aria-hidden="true" class="h-4 w-px bg-current opacity-40"></span>
       <span>{{ v.price | money_without_trailing_zeros }}</span>
     {%- endunless -%}
   </a>
+{%- elsif v.available -%}
+  {%- form 'product', p, class: 'contents' -%}
+    <input type="hidden" name="id" value="{{ v.id }}">
+    <input type="hidden" name="quantity" value="1">
+    <button type="submit" data-cta="{{ location }}" class="{{ base }} {{ look }} {{ class }} cursor-pointer">
+      <span>{{ cart_label | default: 'Add to cart' }}</span>
+      {%- unless show_price == false -%}
+        <span aria-hidden="true" class="h-4 w-px bg-current opacity-40"></span>
+        <span>{{ v.price | money_without_trailing_zeros }}</span>
+      {%- endunless -%}
+    </button>
+  {%- endform -%}
 {%- else -%}
   <a href="{{ p.url }}" data-cta="{{ location }}" class="{{ base }} {{ look }} {{ class }} opacity-80">
     <span>Sold out</span>

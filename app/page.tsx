@@ -46,7 +46,7 @@ export default function Home() {
                 Deep hydration, <span className="accent">made with intention.</span>
               </h1>
               <p className="mt-5 hidden text-lg leading-relaxed text-parchment/90 [text-shadow:0_1px_12px_rgba(46,30,20,0.5)] md:block">
-                Certified organic castor and jojoba, steeped with raw frankincense resin. Two or three drops leave dry skin soft and supple.
+                Certified organic castor and jojoba, steeped with raw frankincense resin. Five to seven drops leave dry skin soft and supple.
               </p>
               <div id="hero-cta" className="mt-8 flex flex-col items-start gap-3 md:items-center">
                 <BuyButton location="hero" variant="light" />
@@ -79,7 +79,7 @@ export default function Home() {
               {[
                 ["3", "ingredients, all named on the label"],
                 ["21+", "days resting on the altar before it ships"],
-                ["2–3", "drops per use, face, hands or body"],
+                ["5–7", "drops per use, face, hands or body"],
                 ["6–8", "weeks from one 1 oz bottle"],
               ].map(([n, label]) => (
                 <div key={label} className="border-l border-copper/40 pl-4">

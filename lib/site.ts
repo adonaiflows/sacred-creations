@@ -7,7 +7,7 @@
 export const SITE_URL = "https://www.sacredcreations.shop";
 export const SHOP_URL = "https://www.sacredcreations.shop/collections/all";
 
-// The site is built to grow past one product (ceramics, jewelry, clothing and a matcha pop-up are
+// The site is built to grow past one product (ceramics, jewelry and clothing are
 // planned). Each product links to its Shopify page, which is where checkout happens.
 export type Product = {
   slug: string;
@@ -32,7 +32,7 @@ export const liquidGold: Product = {
 export const products: Product[] = [liquidGold];
 
 // Shelves that are waiting for what's next. Shown as honest "coming" tags, never as products.
-export const comingSoon = ["Ceramics", "Jewelry", "Clothing", "Matcha pop-up"];
+export const comingSoon = ["Ceramics", "Jewelry", "Clothing"];
 
 // Back-compat for components that only know about one product.
 export const product = liquidGold;
@@ -111,7 +111,7 @@ export const standard = ritual;
 export const faqs = [
   {
     q: "How do I use it?",
-    a: "Apply 2–3 drops to clean, slightly damp skin (face, hands or body), morning or night.",
+    a: "Apply 5–7 drops to clean, slightly damp skin (face, hands or body), morning or night.",
   },
   {
     q: "How long does one bottle last?",

@@ -82,7 +82,7 @@
         "story-3": {
           "type": "stat",
           "settings": {
-            "number": "2–3",
+            "number": "5–7",
             "label": "drops per use, face, hands or body"
           }
         },
@@ -125,20 +125,12 @@
             "title": "Clothing",
             "note": "Coming to the shelf"
           }
-        },
-        "shop-4": {
-          "type": "coming",
-          "settings": {
-            "title": "Matcha pop-up",
-            "note": "Coming to the shelf"
-          }
         }
       },
       "block_order": [
         "shop-1",
         "shop-2",
-        "shop-3",
-        "shop-4"
+        "shop-3"
       ]
     },
     "ingredients": {
